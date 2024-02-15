@@ -8,7 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from util.pcview import PCViews
 
-import wa_module
+from wa_module import wa_module
 
 '''
 In this model,
@@ -200,6 +200,9 @@ class ViewNet(nn.Module):
         # gl = self.gl_pooling2(gl) 
         # size might be a problem
         gl = self.gl_pooling(gl) # the shape is (40,64,16,16)
+        gl2 = self.gl_pooling2(gl)
+        print("test size:")
+        print(gl2.shape)
 
         x = self.set_layer3(x) # 40,64,16,16
         x = self.set_layer4(x)
