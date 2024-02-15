@@ -3,7 +3,7 @@ import torch.nn as nn
 from DWT import DWT_2D
 
 
-class wa_module(nn.Module):
+class wa(nn.Module):
     '''
     This module is used in networks that require a shortcut.
     X --> output, LL(shortcut)
@@ -11,7 +11,7 @@ class wa_module(nn.Module):
         wavename: Wavelet family
     '''
     def __init__(self, wavename='haar'):
-        super(wa_module, self).__init__()
+        #super(wa_module, self).__init__()
         self.dwt = DWT_2D(wavename=wavename)
         self.softmax = nn.Softmax2d()
 
