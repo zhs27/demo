@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
-from DWT import DWT_2D
+from .DWT import DWT_2D
 
 
-class wa(nn.Module):
+class wa_module(nn.Module):
     '''
     This module is used in networks that require a shortcut.
     X --> output, LL(shortcut)
