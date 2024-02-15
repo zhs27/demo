@@ -63,7 +63,7 @@ class ModelNet40_fs(Dataset):
     def __getitem__(self, index):
         point=np.load(self.point_path[index])
         point_index=np.random.permutation(point.shape[0])[:1024]
-        point_index=point_index.astype(np.int)
+        point_index=point_index.astype(np.int64)
         point=point[point_index]
 
         label=self.point_label[index]
