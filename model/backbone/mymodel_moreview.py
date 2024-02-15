@@ -8,7 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from util.pcview import PCViews
 
-from wa_module import wa_module
+from wa_module import wa
 
 '''
 In this model,
