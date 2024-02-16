@@ -198,9 +198,8 @@ class ViewNet(nn.Module):
         
         gl = self.gl_layer2(gl) # just normal convolutional network
         # gl = self.gl_pooling2(gl) 
-        # size might be a problem
         gl2 = self.gl_pooling2(gl)
-        mypool = MaxPooling2D()
+        mypool = nn.MaxPooling2D()
         gl3 = mypool(gl)
         gl = self.gl_pooling(gl) # the shape is (40,64,16,16)
         
