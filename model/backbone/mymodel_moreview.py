@@ -203,7 +203,7 @@ class ViewNet(nn.Module):
         gl2 = self.gl_pooling2(gl)
         print("test size:")
         #print(gl2)
-        print(len(a) for a in gl2)
+        print(len(gl2[0]))
 
         x = self.set_layer3(x) # 40,64,16,16
         x = self.set_layer4(x)
