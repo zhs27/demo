@@ -199,12 +199,13 @@ class ViewNet(nn.Module):
         gl = self.gl_layer2(gl) # just normal convolutional network
         # gl = self.gl_pooling2(gl) 
         # size might be a problem
-        gl = self.gl_pooling(gl) # the shape is (40,64,16,16)
         gl2 = self.gl_pooling2(gl)
+        gl = self.gl_pooling(gl) # the shape is (40,64,16,16)
+        
         print("\n")
         print("test size:")
         #print(gl2)
-        print(len(gl[0]))
+        print(len(gl))
         print("\n")
 
         x = self.set_layer3(x) # 40,64,16,16
