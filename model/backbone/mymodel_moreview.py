@@ -204,7 +204,7 @@ class ViewNet(nn.Module):
         print("\n")
         print("test size:")
         #print(gl2)
-        print(len(gl))
+        print(len(gl[0]))
         print("\n")
 
         x = self.set_layer3(x) # 40,64,16,16
