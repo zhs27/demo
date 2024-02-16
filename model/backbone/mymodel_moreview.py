@@ -201,9 +201,11 @@ class ViewNet(nn.Module):
         # size might be a problem
         gl = self.gl_pooling(gl) # the shape is (40,64,16,16)
         gl2 = self.gl_pooling2(gl)
+        print("\n")
         print("test size:")
         #print(gl2)
         print(len(gl2[0]))
+        print("\n")
 
         x = self.set_layer3(x) # 40,64,16,16
         x = self.set_layer4(x)
