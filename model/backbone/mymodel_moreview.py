@@ -42,6 +42,7 @@ class SetBlock(nn.Module):
         x = self.forward_block(x.view(-1,c,h,w))
         if self.pooling:
             x = self.pool2d(x)
+            x = x[0]
         _, c, h, w = x.size()
         return x.view(n, s, c, h ,w)
 
