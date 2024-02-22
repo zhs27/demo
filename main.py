@@ -293,7 +293,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             if i%show_interval==0:
                 bar.set_description("Loss: %.3f"%(np.mean(summary['loss'])))
         else:
-            batch_cfm=cal_cfm(pred,model.q_label,ncls=cfg.k_way)
+            batch_cfm=cal_cfm(pred,model.q_label,summary['accintype'], ncls=cfg.k_way)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
@@ -303,6 +303,8 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     
     if mode!='train':
         summary['cfm']=confusion_mat
+    
+    print(summary['accintype'])
     
     return summary
             
