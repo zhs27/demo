@@ -216,15 +216,9 @@ class ViewNet(nn.Module):
         
         # gl = self.gl_layer3(gl + self.frame_max(x)[0])
         gl = gl + self.vp2(x)
-        print(gl.size())
-        gl2 = self.gl_pooling2(gl)[0]
-        print(gl2.size())
-        gl2 = self.gl_layer5(gl2)
-        print(gl2.size())
+        gl = self.gl_pooling2(gl)[0]
+        gl = self.gl_layer5(gl)
         gl = self.gl_layer3(gl)
-        print(gl.size())
-        gl = self.gl_layer4(gl)
-        print(gl.size())
 
 
         x = self.set_layer5(x)
