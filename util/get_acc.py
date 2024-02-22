@@ -2,7 +2,7 @@ import torch
 import numpy as np
 from sklearn.metrics import confusion_matrix
 
-def cal_cfm(pred,label,ncls,typeacc):
+def cal_cfm(pred,label,typeacc,ncls):
     pred=pred.cpu().detach().numpy()
     label=label.cpu().detach().numpy()
     
