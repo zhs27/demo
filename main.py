@@ -287,7 +287,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
         
         summary['loss']+=[loss.item()]
 
-        summary['accintype'] = np.zeros(2,41)
+        summary['accintype'] = np.zeros((2,41))
         
         if mode=='train':
             if i%show_interval==0:
