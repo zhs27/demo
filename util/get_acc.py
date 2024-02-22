@@ -7,5 +7,7 @@ def cal_cfm(pred,label,ncls):
     label=label.cpu().detach().numpy()
     
     pred=np.argmax(pred,1)
+    print("test:")
+    print(pred, label, "\n")
     cfm=confusion_matrix(label,pred,labels=np.arange(ncls))
     return cfm

@@ -192,6 +192,7 @@ class ViewNet(nn.Module):
         128 is the image size
         '''
         norm_img=self.get_img(inpt) # (20,6,128,128)
+        #norm_img.save()
         norm_img=norm_img.unsqueeze(2)
         
         x=self.set_layer1(norm_img)

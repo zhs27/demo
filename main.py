@@ -261,7 +261,7 @@ def train_model(model,train_loader,val_loader,cfg):
 
 def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     confusion_mat=np.zeros((cfg.k_way,cfg.k_way))
-    summary={"acc":[],"loss":[]}
+    summary={"acc":[],"loss":[],"accintype":[]}
     device=next(model.parameters()).device
     
     if mode=='train':
@@ -286,6 +286,8 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
         
         
         summary['loss']+=[loss.item()]
+
+        summary['accintype'] = np.zeros(2,41)
         
         if mode=='train':
             if i%show_interval==0:
