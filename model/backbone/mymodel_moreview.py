@@ -219,7 +219,7 @@ class ViewNet(nn.Module):
         print(gl.size())
         gl2 = self.gl_pooling2(gl)[0]
         print(gl2.size())
-        gl2 = self.gl_layer5(gl)
+        gl2 = self.gl_layer5(gl2)
         print(gl2.size())
         gl = self.gl_layer3(gl)
         print(gl.size())
