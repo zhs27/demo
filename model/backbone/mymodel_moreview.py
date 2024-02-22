@@ -144,7 +144,7 @@ class ViewNet(nn.Module):
         self.gl_layer2 = BasicConv2d(_gl_channels[0], _gl_channels[0], 3, padding=1)
         self.gl_layer3 = BasicConv2d(_gl_channels[0], _gl_channels[1], 3, padding=1)
         self.gl_layer4 = BasicConv2d(_gl_channels[1], _gl_channels[1], 3, padding=1)
-        self.gl_layer5 = nn.ConvTranspose2d(64, 64, 2, stride=2, padding=1)
+        self.gl_layer5 = nn.ConvTranspose2d(64, 64, 4, stride=2, padding=1)
         self.gl_pooling = nn.MaxPool2d(2)
         # Replace max pooling by wavelet block
         self.gl_pooling2 = wa_module.wa_module()
