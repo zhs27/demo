@@ -8,7 +8,7 @@ def cal_cfm(pred,label,typeacc,ncls):
     
     pred=np.argmax(pred,1)
     cfm=confusion_matrix(label,pred,labels=np.arange(ncls))
-    for i in range(0, label.size()):
+    for i,j in range(0, label.size):
         typeacc[0,label[i]] += 1
         if pred[i] == label[i]:
             typeacc[1, label[i]] += 1 
