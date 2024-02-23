@@ -191,6 +191,7 @@ class ViewNet(nn.Module):
         6 is the view number
         128 is the image size
         '''
+        print(inpt)
         norm_img=self.get_img(inpt) # (20,6,128,128)
         #norm_img.save()
         norm_img=norm_img.unsqueeze(2)
