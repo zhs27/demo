@@ -203,7 +203,7 @@ class ViewNet(nn.Module):
             for j in range(6):
                 path = os.path.join(root, str(i))
                 os.mkdir(path)
-                path = os.path.join(path, str(j), '.jpg')
+                path = os.path.join(path, str(j), '.png')
                 save_image(norm_img[i, j, 0],path)
 
         
