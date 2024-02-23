@@ -263,6 +263,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     confusion_mat=np.zeros((cfg.k_way,cfg.k_way))
     summary={"acc":[],"loss":[],"accintype":[]}
     device=next(model.parameters()).device
+    summary['accintype'] = np.zeros(5)
     
     if mode=='train':
         model.train()
@@ -287,16 +288,17 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
         
         summary['loss']+=[loss.item()]
 
-        summary['accintype'] = np.zeros((2,41))
+        
         
         if mode=='train':
             if i%show_interval==0:
                 bar.set_description("Loss: %.3f"%(np.mean(summary['loss'])))
         else:
             batch_cfm=cal_cfm(pred,model.q_label, ncls=cfg.k_way)
-            print(model.q_label)
-            print(pred)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
+
+            for i in range(cfg.k_way):
+                summary['accintype'][i] = batch_cfm[i, i] / np.sum(batch_cfm[i]) 
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
                 bar.set_description("mea_ac: %.3f"%(np.mean(summary['acc'])))
