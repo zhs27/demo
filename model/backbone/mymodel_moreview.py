@@ -208,8 +208,7 @@ class ViewNet(nn.Module):
                     print()
                 picname = str(j) + '.png'
                 path = os.path.join(path, picname)
-                print(path)
-                #save_image(norm_img[i, j, 0],path)
+                save_image(norm_img[i, j, 0],path)
 
         
         x=self.set_layer1(norm_img)
