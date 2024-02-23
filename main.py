@@ -235,7 +235,7 @@ def train_model(model,train_loader,val_loader,cfg):
         # ===========================
 
         logger.debug('epoch {}: {}. Highest: {}. Interval: {}'.format(e,accuracy,max_ac,max_interval))
-        print(max_accintype)
+        print("best acc in type:%.3f", max_accintype)
         # print('epoch {}: {}. Highese: {}'.format(e,accuracy,np.max(acc_list)))
         
         if np.max(acc_list)==acc_list[-1]:
@@ -269,6 +269,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     device=next(model.parameters()).device
     summary['accintype'] = np.zeros(5)
     
+    
     if mode=='train':
         model.train()
     else:
@@ -279,7 +280,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
         
         if mode=='train':
             optimizer.zero_grad()
-            pred,loss=model(x)
+            pred,loss=model(x,i, 'train')
             
             #==take one step==#
             loss.backward()
@@ -287,7 +288,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             #=================#
         else:
             with torch.no_grad():
-                pred,loss=model(x)
+                pred,loss=model(x,i,'val')
         
         
         summary['loss']+=[loss.item()]
