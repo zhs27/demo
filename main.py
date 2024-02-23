@@ -221,12 +221,13 @@ def train_model(model,train_loader,val_loader,cfg):
         
         accuracy=val_summary['meac']
         acc_list.append(val_summary['meac'])
-        acc_list.append(val_accintype, axis=0)
+        accintype_list.append(val_accintype)
 
         # === get 95% interval =====
         std_acc=np.std(batch_acc_list)
         interval=1.960*(std_acc/np.sqrt(len(batch_acc_list)))
         interval_list.append(interval)
+        print(accintype_list)
 
         max_acc_index=np.argmax(acc_list)
         max_ac=acc_list[max_acc_index]
@@ -312,7 +313,6 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     if mode!='train':
         summary['cfm']=confusion_mat
     
-    print(summary['acc'])
     
     return summary
             
