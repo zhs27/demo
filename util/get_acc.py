@@ -12,4 +12,6 @@ def cal_cfm(pred,label,typeacc,ncls):
         typeacc[0,label[i]] += 1
         if pred[i] == label[i]:
             typeacc[1, label[i]] += 1 
-    return cfm
+    print(typeacc)
+    print(cfm)
+    return cfm,typeacc
