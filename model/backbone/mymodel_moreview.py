@@ -6,6 +6,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision.utils import save_image
 from util.pcview import PCViews
 
 from . import wa_module
@@ -196,7 +197,15 @@ class ViewNet(nn.Module):
         norm_img=self.get_img(inpt) # (20,6,128,128)
         #norm_img.save()
         norm_img=norm_img.unsqueeze(2)
-        print(norm_img[10, 5, 0])
+
+        root = "projimg/"
+        for i  in range(norm_img.shape[0]):
+            for j in range(6):
+                path = os.path.join(root, i)
+                os.mkdir(path)
+                path = os.path.join(path, j, '.jpg')
+                save_image(norm_img[i, j, 0],path)
+
         
         x=self.set_layer1(norm_img)
         x=self.set_layer2(x)
