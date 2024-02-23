@@ -230,11 +230,12 @@ def train_model(model,train_loader,val_loader,cfg):
 
         max_acc_index=np.argmax(acc_list)
         max_ac=acc_list[max_acc_index]
-        max_acc_index = accintype_list[max_acc_index]
+        max_accintype = accintype_list[max_acc_index]
         max_interval=interval_list[max_acc_index]
         # ===========================
 
         logger.debug('epoch {}: {}. Highest: {}. Interval: {}'.format(e,accuracy,max_ac,max_interval))
+        print(max_accintype)
         # print('epoch {}: {}. Highese: {}'.format(e,accuracy,np.max(acc_list)))
         
         if np.max(acc_list)==acc_list[-1]:
