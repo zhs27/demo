@@ -196,7 +196,7 @@ class ViewNet(nn.Module):
         norm_img=self.get_img(inpt) # (20,6,128,128)
         #norm_img.save()
         norm_img=norm_img.unsqueeze(2)
-        print(norm_img[10, 1].size())
+        print(norm_img[10, 1, 0].size())
         
         x=self.set_layer1(norm_img)
         x=self.set_layer2(x)
