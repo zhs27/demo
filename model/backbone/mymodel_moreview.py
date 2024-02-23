@@ -201,9 +201,9 @@ class ViewNet(nn.Module):
         root = "projimg/"
         for i  in range(norm_img.shape[0]):
             for j in range(6):
-                path = os.path.join(root, i)
+                path = os.path.join(root, str(i))
                 os.mkdir(path)
-                path = os.path.join(path, j, '.jpg')
+                path = os.path.join(path, str(j), '.jpg')
                 save_image(norm_img[i, j, 0],path)
 
         
