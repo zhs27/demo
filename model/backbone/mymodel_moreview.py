@@ -186,7 +186,7 @@ class ViewNet(nn.Module):
 
 
 
-    def forward(self,inpt,counter,type):
+    def forward(self,inpt):
         '''
         norm_img shape is (20,6,128,128)
         20 is the batch_size
@@ -201,7 +201,7 @@ class ViewNet(nn.Module):
         root = "projimg/"
         for i  in range(norm_img.shape[0]):
             for j in range(6):
-                path = os.path.join(root, type, str(counter), str(i))
+                path = os.path.join(root, str(i))
                 try:
                     os.mkdir(path)
                 except:
