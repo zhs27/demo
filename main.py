@@ -180,7 +180,7 @@ def train_model(model,train_loader,val_loader,cfg):
         mean_acc=np.mean(epsum['acc'])
         summary={'meac':mean_acc}
         summary["loss/valid"]=np.mean(epsum['loss'])
-        return summary,epsum['cfm'],epsum['acc']
+        return summary,epsum['cfm'],epsum['acc'],epsum['accintype']
     
     
     # ======== define exp path ===========
@@ -207,12 +207,13 @@ def train_model(model,train_loader,val_loader,cfg):
     
     # ========= train start ===============
     acc_list=[]
+    accintype_list=[]
     interval_list=[]
 
     tqdm_epochs=tqdm(range(cfg.epochs),unit='epoch',ncols=100)
     for e in tqdm_epochs:
         train_summary=train_one_epoch()
-        val_summary,conf_mat,batch_acc_list=eval_one_epoch()
+        val_summary,conf_mat,batch_acc_list,val_accintype=eval_one_epoch()
         summary={**train_summary,**val_summary}
         
         if cfg.lr_sch:
@@ -220,6 +221,7 @@ def train_model(model,train_loader,val_loader,cfg):
         
         accuracy=val_summary['meac']
         acc_list.append(val_summary['meac'])
+        acc_list.append(val_accintype)
 
         # === get 95% interval =====
         std_acc=np.std(batch_acc_list)
@@ -228,6 +230,7 @@ def train_model(model,train_loader,val_loader,cfg):
 
         max_acc_index=np.argmax(acc_list)
         max_ac=acc_list[max_acc_index]
+        max_acc_index = accintype_list[max_acc_index]
         max_interval=interval_list[max_acc_index]
         # ===========================
 
