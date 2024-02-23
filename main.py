@@ -221,7 +221,7 @@ def train_model(model,train_loader,val_loader,cfg):
         
         accuracy=val_summary['meac']
         acc_list.append(val_summary['meac'])
-        acc_list.append(val_accintype)
+        acc_list.append(val_accintype, axis=0)
 
         # === get 95% interval =====
         std_acc=np.std(batch_acc_list)
