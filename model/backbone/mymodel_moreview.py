@@ -176,11 +176,11 @@ class ViewNet(nn.Module):
         _,h,w=imgs.shape
         
         imgs=imgs.reshape(bs,6,-1)
-        print(imgs.size())
         max=torch.max(imgs,-1,keepdim=True)[0]
         min=torch.min(imgs,-1,keepdim=True)[0]
         
         nor_img=(imgs-min)/(max-min+0.0001)
+        print(nor_img.size())
         nor_img=nor_img.reshape(bs,6,h,w)
         return nor_img
 
