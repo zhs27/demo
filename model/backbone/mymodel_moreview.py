@@ -206,7 +206,8 @@ class ViewNet(nn.Module):
                     os.mkdir(path)
                 except:
                     print()
-                path = os.path.join(path, str(j), '.png')
+                picname = str(j) + '.png'
+                path = os.path.join(path, picname)
                 print(path)
                 #save_image(norm_img[i, j, 0],path)
 
