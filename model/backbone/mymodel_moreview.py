@@ -172,6 +172,7 @@ class ViewNet(nn.Module):
     def get_img(self,inpt):
         bs=inpt.shape[0]
         imgs=self.pcview.get_img(inpt.permute(0,2,1))
+        print(imgs.size())
         _,h,w=imgs.shape
         
         imgs=imgs.reshape(bs,6,-1)
