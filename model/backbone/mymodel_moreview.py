@@ -181,7 +181,7 @@ class ViewNet(nn.Module):
         
         nor_img=(imgs-min)/(max-min+0.0001)
         nor_img=nor_img.reshape(bs,6,h,w)
-        print(nor_img.size())
+        print(nor_img)
         return nor_img
 
 
