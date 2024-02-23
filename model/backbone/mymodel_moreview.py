@@ -180,8 +180,8 @@ class ViewNet(nn.Module):
         min=torch.min(imgs,-1,keepdim=True)[0]
         
         nor_img=(imgs-min)/(max-min+0.0001)
-        print(nor_img.size())
         nor_img=nor_img.reshape(bs,6,h,w)
+        print(nor_img.size())
         return nor_img
 
 
