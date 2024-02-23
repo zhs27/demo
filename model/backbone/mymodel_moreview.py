@@ -204,7 +204,8 @@ class ViewNet(nn.Module):
                 path = os.path.join(root, str(i))
                 os.mkdir(path)
                 path = os.path.join(path, str(j), '.png')
-                save_image(norm_img[i, j, 0],path)
+                print(path)
+                #save_image(norm_img[i, j, 0],path)
 
         
         x=self.set_layer1(norm_img)
