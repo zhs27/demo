@@ -198,18 +198,6 @@ class ViewNet(nn.Module):
         #norm_img.save()
         norm_img=norm_img.unsqueeze(2)
 
-        root = "projimg/"
-        for i  in range(norm_img.shape[0]):
-            for j in range(6):
-                path = os.path.join(root, str(i))
-                try:
-                    os.mkdir(path)
-                except:
-                    pass
-                picname = str(j) + '.png'
-                path = os.path.join(path, picname)
-                save_image(norm_img[i, j, 0],path)
-
         
         x=self.set_layer1(norm_img)
         x=self.set_layer2(x)
