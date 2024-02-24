@@ -303,7 +303,8 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
 
             for i in range(cfg.k_way):
-                summary['accintype'][i] = batch_cfm[i, i] / np.sum(batch_cfm[i]) 
+                summary['accintype'][i] = batch_cfm[i, i] / np.sum(batch_cfm[i,:]) 
+                print(batch_cfm, batch_cfm[i,:])
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
                 bar.set_description("mea_ac: %.3f"%(np.mean(summary['acc'])))
