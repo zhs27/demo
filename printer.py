@@ -11,10 +11,10 @@ def main():
     path = "modelnet40_fs_crossvalidation/"
     train_loader,val_loader=get_sets(data_path=path,fold=0,k_way=5,n_shot=1,query_num=10,data_aug=True)
     for i, (x_cpu,y_cpu) in enumerate(train_loader):
-        x,y=x_cpu.to(device),y_cpu.to(device)
+        x,y=x_cpu.to('cuda'),y_cpu.to('cuda')
         projimage(x,"train",i)
     for i, (x_cpu,y_cpu) in enumerate(train_loader):
-        x,y=x_cpu.to(device),y_cpu.to(device)
+        x,y=x_cpu.to('cuda'),y_cpu.to('cuda')
         projimage(x,"val",i)
 
 class projimage():
