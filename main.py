@@ -177,6 +177,9 @@ def train_model(model,train_loader,val_loader,cfg):
     def eval_one_epoch():
         bar=tqdm(val_loader,ncols=100,unit='batch',leave=False)
         epsum=run_one_epoch(model,bar,"valid",loss_func=loss_func)
+        print(epsum['accintype'])
+        epsum['accintype'] = np.mean(epsum['accintype'], axis=1)
+        print(epsum['accintype'])
         mean_acc=np.mean(epsum['acc'])
         summary={'meac':mean_acc}
         summary["loss/valid"]=np.mean(epsum['loss'])
@@ -278,6 +281,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     for i, (x_cpu,y_cpu) in enumerate(bar):
         x,y=x_cpu.to(device),y_cpu.to(device)
         
+        
         if mode=='train':
             optimizer.zero_grad()
             pred,loss=model(x)
@@ -302,8 +306,9 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             batch_cfm=cal_cfm(pred,model.q_label, ncls=cfg.k_way)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
 
+            c = c + 1
             for i in range(cfg.k_way):
-                summary['accintype'][i] = batch_cfm[i, i] / np.sum(batch_cfm[i,:]) 
+                summary['accintype'][i].append(1.000 * batch_cfm[i, i] / np.sum(batch_cfm[i,:])) 
                 print(batch_cfm, batch_cfm[i,:])
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
@@ -313,7 +318,6 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     
     if mode!='train':
         summary['cfm']=confusion_mat
-    
     
     return summary
             
