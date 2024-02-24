@@ -27,11 +27,20 @@ def img(inpt,type,num):
     #norm_img.save()
     norm_img=norm_img.unsqueeze(2)
 
-    root = "projimgm/"
+    root = "projimg/"
     for i  in range(norm_img.shape[0]):
         for j in range(6):
-            path = os.path.join(root,type,str(num),str(i))
-            os.mkdir(path)
+            path = os.path.join(root,type)
+            try:
+                os.mkdir(path)
+            except:
+                pass
+            path = os.path.join(path,str(num))
+            try:
+                os.mkdir(path)
+            except:
+                pass
+            path = os.path.join(path,str(i))
             try:
                 os.mkdir(path)
             except:
