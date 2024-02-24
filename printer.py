@@ -51,7 +51,7 @@ def img(inpt,type,num):
 
 
 def main():
-    path = "modelnet40_fs_crossvalidation/"
+    path = "ModelNet40_C_fewshot/"
     train_loader,val_loader=get_sets(data_path=path,fold=0,k_way=5,n_shot=1,query_num=10,data_aug=True)
     for i, (x_cpu,y_cpu) in enumerate(train_loader):
         x,y=x_cpu.to('cuda'),y_cpu.to('cuda')
