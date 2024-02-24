@@ -235,7 +235,7 @@ def train_model(model,train_loader,val_loader,cfg):
         # ===========================
 
         logger.debug('epoch {}: {}. Highest: {}. Interval: {}'.format(e,accuracy,max_ac,max_interval))
-        print("best acc in type: %.3f", max_accintype)
+        print("best acc in type:", max_accintype)
         # print('epoch {}: {}. Highese: {}'.format(e,accuracy,np.max(acc_list)))
         
         if np.max(acc_list)==acc_list[-1]:

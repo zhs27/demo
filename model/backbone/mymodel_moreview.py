@@ -261,6 +261,8 @@ class ViewNet(nn.Module):
         return feature
 
 
+
+
 if __name__=='__main__':
     '''
     5 way
