@@ -12,18 +12,15 @@ def main():
     train_loader,val_loader=get_sets(data_path=path,fold=0,k_way=5,n_shot=1,query_num=10,data_aug=True)
     for i, (x_cpu,y_cpu) in enumerate(train_loader):
         x,y=x_cpu.to('cuda'),y_cpu.to('cuda')
-        projimage(x,"train",i)
+        img(x,"train",i)
     for i, (x_cpu,y_cpu) in enumerate(train_loader):
         x,y=x_cpu.to('cuda'),y_cpu.to('cuda')
-        projimage(x,"val",i)
+        img(x,"val",i)
 
-class projimage():
-    def __init__(self):
-        pass
 
-    def get_img(self,inpt):
+    def get_img(inpt):
         bs=inpt.shape[0]
-        imgs=self.pcview.get_img(inpt.permute(0,2,1))
+        imgs=PCViews().get_img(inpt.permute(0,2,1))
         
         _,h,w=imgs.shape
         
@@ -35,16 +32,16 @@ class projimage():
         nor_img=nor_img.reshape(bs,6,h,w)
         return nor_img
     
-    def forward(self, inpt, num):
+    def img(inpt,type,num):
         
-        norm_img=self.get_img(inpt) # (20,6,128,128)
+        norm_img=get_img(inpt) # (20,6,128,128)
         #norm_img.save()
         norm_img=norm_img.unsqueeze(2)
 
         root = "projimg/"
         for i  in range(norm_img.shape[0]):
             for j in range(6):
-                path = os.path.join(root,str(num),str(i))
+                path = os.path.join(root,type,str(num),str(i))
                 try:
                     os.mkdir(path)
                 except:
