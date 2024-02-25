@@ -306,7 +306,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             batch_cfm=cal_cfm(pred,model.q_label, ncls=cfg.k_way)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
 
-            onebatchaccintype = np.array()
+            onebatchaccintype = np.array([])
             for i in range(cfg.k_way):
                 np.append(onebatchaccintype,[batch_cfm[i, i] / np.sum(batch_cfm[i,:])])
                 print(batch_cfm[i, i] / np.sum(batch_cfm[i,:]))
