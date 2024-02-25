@@ -270,7 +270,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     confusion_mat=np.zeros((cfg.k_way,cfg.k_way))
     summary={"acc":[],"loss":[],"accintype":[]}
     device=next(model.parameters()).device
-    summary['accintype'] = np.empty((0,5))
+    summary['accintype'] = np.empty([0,5])
     
     
     if mode=='train':
