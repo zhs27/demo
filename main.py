@@ -177,9 +177,9 @@ def train_model(model,train_loader,val_loader,cfg):
     def eval_one_epoch():
         bar=tqdm(val_loader,ncols=100,unit='batch',leave=False)
         epsum=run_one_epoch(model,bar,"valid",loss_func=loss_func)
-        print(epsum['accintype'])
+        #print(epsum['accintype'])
         epsum['accintype'] = np.mean(epsum['accintype'], axis=1)
-        print(epsum['accintype'])
+        #print(epsum['accintype'])
         mean_acc=np.mean(epsum['acc'])
         summary={'meac':mean_acc}
         summary["loss/valid"]=np.mean(epsum['loss'])
@@ -308,7 +308,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
 
             for i in range(cfg.k_way):
                 np.append(summary['accintype'][i],(1.000 * batch_cfm[i, i] / np.sum(batch_cfm[i,:]))) 
-                print(batch_cfm, batch_cfm[i,:])
+                print(batch_cfm[i,i], batch_cfm[i,:])
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
                 bar.set_description("mea_ac: %.3f"%(np.mean(summary['acc'])))
