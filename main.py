@@ -310,7 +310,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             for i in range(cfg.k_way):
                 np.append(onebatchaccintype,(1.000 * batch_cfm[i, i] / np.sum(batch_cfm[i,:]))) 
 
-            summary['accintype'].append(onebatchaccintype, axis = 0)
+            np.append(summary['accintype'],onebatchaccintype, axis = 0)
             print(summary['accintype'])
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
