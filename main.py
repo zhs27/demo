@@ -177,7 +177,6 @@ def train_model(model,train_loader,val_loader,cfg):
     def eval_one_epoch():
         bar=tqdm(val_loader,ncols=100,unit='batch',leave=False)
         epsum=run_one_epoch(model,bar,"valid",loss_func=loss_func)
-        print(epsum['accintype'])
         epsum['accintype'] = np.mean(epsum['accintype'], axis=0)
         mean_acc=np.mean(epsum['acc'])
         summary={'meac':mean_acc}
