@@ -313,7 +313,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
 
             onebatchaccintype = np.array([onebatchaccintype])
             print(onebatchaccintype)
-            np.append(summary['accintype'],onebatchaccintype, axis = 0)
+            summary['accintype'] = np.append(summary['accintype'],onebatchaccintype, axis = 0)
             print(summary['accintype'])
             summary['acc'].append(batch_acc)
             if i%show_interval==0:
