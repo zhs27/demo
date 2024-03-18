@@ -26,7 +26,7 @@ def get_arg():
     cfg=argparse.ArgumentParser()
     cfg.add_argument('--exp_name',default='try')
     cfg.add_argument('--multigpu',default=False)
-    cfg.add_argument('--epochs',default=80,type=int)
+    cfg.add_argument('--epochs',default=10,type=int)
     cfg.add_argument('--decay_ep',default=5,type=int)
     cfg.add_argument('--gamma',default=0.7,type=float)
     cfg.add_argument('--lr',default=1e-4,type=float)
