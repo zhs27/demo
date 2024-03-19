@@ -299,6 +299,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
         if mode=='train':
             optimizer.zero_grad()
             x = get_img(x)
+            x=x.unsqueeze(2)
             pred,loss=model(x)
             
             #==take one step==#
@@ -308,6 +309,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
         else:
             with torch.no_grad():
                 x = get_img(x)
+                x=x.unsqueeze(2)
                 pred,loss=model(x)
         
         
