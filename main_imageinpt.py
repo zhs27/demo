@@ -203,6 +203,7 @@ def train_model(model,train_loader,val_loader,cfg):
     # ======== define exp path ===========
     exp_path=os.path.join(cfg.project_path,'Exp',cfg.exp_folder_name,cfg.exp_name)
     if not os.path.exists(exp_path):
+        print("saving path created")
         os.makedirs(exp_path)
 
 
