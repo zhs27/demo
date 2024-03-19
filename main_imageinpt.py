@@ -49,7 +49,7 @@ def get_arg():
 
 
     # ======== path needed ==============#
-    cfg.add_argument('--project_path',default=None,help='The path you save this project')
+    cfg.add_argument('--project_path',default='./best',help='The path you save this project')
     cfg.add_argument('--data_path',default='D:/Computer_vision/Dataset/ModelNet40_C_fewshot') 
     # ===================================#    
     return cfg.parse_args()
