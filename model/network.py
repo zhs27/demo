@@ -12,7 +12,7 @@ from model.backbone.DGCNN import DGCNN_fs
 from model.backbone.multiview import mutiview_net
 from model.backbone.Gaitset_net import Gateset_net
 from model.backbone.mymodel_moreview import ViewNet
-from model.backbone.mymodel_moreview import ViewNetimginpt
+from model.backbone.model_imginpt import ViewNetimginpt
 from model.backbone.mymodel_pointview import pointview
 from model.backbone.PointTransformer import PointTransformerCls
 # =============================
