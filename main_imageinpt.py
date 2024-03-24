@@ -2,6 +2,8 @@ import torch
 from tqdm import tqdm
 import argparse
 import numpy as np
+from cartoonx import CartoonX
+
 
 
 # from Dataloader.model_net_cross_val import get_sets
@@ -166,15 +168,26 @@ def main(cfg):
     
     if cfg.train:
         train_model(model,train_loader,val_loader,cfg)
+        torch.save(model.state_dict(), 'best.pth')
+
     
     else:
         test_model(model,val_loader,cfg)
+        
     
+CARTOONX_HPARAMS = {
+        "l1lambda": 285., "lr": 1e-1, 'obfuscation': 'gaussian',
+        "maximize_label": True, "optim_steps": 300,  
+        "noise_bs": 16, 'mask_init': 'ones'
+} 
 
+cartoonx_method = CartoonX(model=model, device=cfg.device, **CARTOONX_HPARAMS)
 
 def train_model(model,train_loader,val_loader,cfg):
     device=torch.device(cfg.device)
     model=model.to(device)
+
+    
     
     #====== loss and optimizer =======
     loss_func=nn.CrossEntropyLoss()
@@ -311,6 +324,9 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
                 x = get_img(x)
                 x=x.unsqueeze(2)
                 pred,loss=model(x)
+            print(pred[0])
+            print(pred.size())
+
         
         
         summary['loss']+=[loss.item()]
@@ -321,9 +337,9 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             if i%show_interval==0:
                 bar.set_description("Loss: %.3f"%(np.mean(summary['loss'])))
         else:
-            print(x[0].size())
             batch_cfm=cal_cfm(pred,model.q_label, ncls=cfg.k_way)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
+            
 
             onebatchaccintype = np.zeros(5)
             for i in range(cfg.k_way):
@@ -338,7 +354,8 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             
             confusion_mat+=batch_cfm
     
-    torch.save(model.state_dict(), 'best.pth')
+    
+
     if mode!='train':
         summary['cfm']=confusion_mat
     
