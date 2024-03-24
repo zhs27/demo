@@ -189,9 +189,10 @@ def main(cfg):
             x = get_img(x)
             x=x.unsqueeze(2)
             pred,loss=model(x)
+        print(x.size(), pred.size())
 
-        cartoonx, history_cartoonx = cartoonx_method(x, preds)
-        if(x == 1):
+        #cartoonx, history_cartoonx = cartoonx_method(x, pred)
+        if(i == 1):
             quit    
 
 
