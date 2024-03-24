@@ -338,7 +338,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             
             confusion_mat+=batch_cfm
     
-    torch.save(model, 'best.pth')
+    torch.save(model.state_dict(), 'best.pth')
     if mode!='train':
         summary['cfm']=confusion_mat
     
