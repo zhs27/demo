@@ -186,7 +186,7 @@ class ViewNet(nn.Module):
 
 
 
-    def forward(self,inpt, moduleQ):
+    def forward(self,inpt, moduleQ = None):
         '''
         norm_img shape is (20,6,128,128)
         20 is the batch_size

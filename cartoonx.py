@@ -57,12 +57,31 @@ class CartoonX:
             x: torch.Tensor of shape (bs,c,h,w)
             target: torch.Tensor of shape (bs,)
         """
+        '''
         assert len(x.shape)==4
         assert x.requires_grad == False
-        
+        '''
         # Initialize optimization loss tracking
         l1wavelet_loss = []
         distortion_loss = []
+
+        '''
+        # apply dwt on all images
+        yl = []
+        yh = []
+        for i in x[0]:
+            y1,y2 = self.forward_dwt(i)
+            self.compute_obfuscation_strategy(y1, y2)
+            m_y1,m_y2 = self.get_init_mask(yl, yh) 
+            yl.append(y1)
+            yh.append(y2)
+            m_yl.append(m_y1)
+            m_yh.append(m_y2)
+
+
+        # compute obfuscation strategy
+
+        '''
 
         # Get wavelet coefficients of colored image 
         # (yl are low pass coefficients, yh are high pass coeffcients)
