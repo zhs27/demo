@@ -321,7 +321,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             if i%show_interval==0:
                 bar.set_description("Loss: %.3f"%(np.mean(summary['loss'])))
         else:
-            print(x.size())
+            print(x[0].size())
             batch_cfm=cal_cfm(pred,model.q_label, ncls=cfg.k_way)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
 
@@ -338,6 +338,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
             
             confusion_mat+=batch_cfm
     
+    torch.save(model, 'best.pth')
     if mode!='train':
         summary['cfm']=confusion_mat
     
