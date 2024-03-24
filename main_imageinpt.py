@@ -175,13 +175,7 @@ def main(cfg):
         test_model(model,val_loader,cfg)
         
     
-CARTOONX_HPARAMS = {
-        "l1lambda": 285., "lr": 1e-1, 'obfuscation': 'gaussian',
-        "maximize_label": True, "optim_steps": 300,  
-        "noise_bs": 16, 'mask_init': 'ones'
-} 
 
-cartoonx_method = CartoonX(model=model, device=cfg.device, **CARTOONX_HPARAMS)
 
 def train_model(model,train_loader,val_loader,cfg):
     device=torch.device(cfg.device)
@@ -298,6 +292,14 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
     summary={"acc":[],"loss":[],"accintype":[]}
     device=next(model.parameters()).device
     summary['accintype'] = np.empty([0,5])
+
+    CARTOONX_HPARAMS = {
+        "l1lambda": 285., "lr": 1e-1, 'obfuscation': 'gaussian',
+        "maximize_label": True, "optim_steps": 300,  
+        "noise_bs": 16, 'mask_init': 'ones'
+} 
+
+    cartoonx_method = CartoonX(model=model, device=cfg.device, **CARTOONX_HPARAMS)
     
     
     if mode=='train':
@@ -326,6 +328,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
                 pred,loss=model(x)
             print(pred[0])
             print(pred.size())
+            print(x.size())
 
         
         
