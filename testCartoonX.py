@@ -187,7 +187,7 @@ def main(cfg):
             x=x.unsqueeze(2)
             pred,loss=model(x)
         print(x[0].unsqueeze(0).size())
-        cartoonx,__ = cartoonx_method(x[0],torch.argmax(pred[0]).detach())
+        cartoonx,__ = cartoonx_method(x[0],torch.argmax(pred[0]).unsqueeze(0).detach())
         
         print(cartoonx.size())
 
