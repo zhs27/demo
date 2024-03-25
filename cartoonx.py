@@ -290,7 +290,6 @@ class CartoonX:
         x_t = torch.tensor()
         masknum = 0
         for i in range(0, len(x), 6):
-            print(x[i:i+6].size())
             x_t.append(x[i:i+6])
             masknum += 1
         x_t = torch.stack(x_t)
