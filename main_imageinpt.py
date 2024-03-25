@@ -174,6 +174,7 @@ def main(cfg):
 
     
     else:
+        print(2)
         test_model(model,val_loader,cfg)
         
     
