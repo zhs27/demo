@@ -296,7 +296,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
 
     CARTOONX_HPARAMS = {
         "l1lambda": 285., "lr": 1e-1, 'obfuscation': 'gaussian',
-        "maximize_label": True, "optim_steps": 300,  
+        "maximize_label": True, "optim_steps": 20,  
         "noise_bs": 16, 'mask_init': 'ones'
 } 
 
