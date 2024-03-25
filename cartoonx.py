@@ -290,7 +290,7 @@ class CartoonX:
         x_t = []
         masks = 0
         for i in range(0, len(x), 6):
-            a = torch.stack(x[i,0],x[i+1,0],x[i+2,0],x[i+3,0],x[i+4,0],x[i+5,0])
+            a = torch.stack([x[i,0],x[i+1,0],x[i+2,0],x[i+3,0],x[i+4,0],x[i+5,0]])
             a.unsqueeze(0)
             print(a.size())
             self.model(a)
