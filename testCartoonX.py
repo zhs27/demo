@@ -187,6 +187,7 @@ def main(cfg):
             x=x.unsqueeze(2)
             pred,loss=model(x)
         cartoonx,__ = cartoonx_method(x[0],torch.argmax(pred[0]).detach())
+        print(x[0])
         print(cartoonx.size())
 
         #cartoonx, history_cartoonx = cartoonx_method(x, pred)
