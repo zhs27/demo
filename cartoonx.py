@@ -288,7 +288,7 @@ class CartoonX:
     def get_model_output(self, x, target):
         idx_1 = torch.tensor(np.arange(x.size(0)), dtype=torch.int64)
         idx_2 = target
-        out = softmax(self.model(x))[idx_1, idx_2]
+        out = self.model(x)[0]
         return out
 
 
