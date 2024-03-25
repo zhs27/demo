@@ -290,12 +290,8 @@ class CartoonX:
         x_t = []
         masks = 0
         for i in range(0, len(x), 6):
-            a = torch.stack([x[i,0],x[i+1,0],x[i+2,0],x[i+3,0],x[i+4,0],x[i+5,0]])
-            a = a.unsqueeze(0)
-            a = a.unsqueeze(2)
-            print(a.size())
-            self.model(a)
-            x_t.append(x[i:i+6])
+            x_t.append(x[i:i+6].to('cuda'))
+            
             masks += 1
         x_t = torch.stack(x_t)
         x_t.unsqueeze(0)
