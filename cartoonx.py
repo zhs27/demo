@@ -288,7 +288,8 @@ class CartoonX:
     def get_model_output(self, x, target):
         idx_1 = torch.tensor(np.arange(x.size(0)), dtype=torch.int64)
         idx_2 = target
-        out = self.model(x)[0]
+        out = self.model(x)
+        print(self.model(x))
         return out
 
 
