@@ -326,7 +326,7 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
                 x = get_img(x)
                 x=x.unsqueeze(2)
                 pred,loss=model(x)
-            print(pred[0].cpu().detach().numpy())
+            print(torch.argmax(pred[0], dim=1))
             print(pred.size())
             print(x.size())
 
