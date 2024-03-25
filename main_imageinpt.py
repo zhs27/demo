@@ -167,8 +167,6 @@ def main(cfg):
         model=nn.DataParallel(model)
     
     if cfg.train:
-        print(1)
-        test_model(model,val_loader,cfg)
         train_model(model,train_loader,val_loader,cfg)
         torch.save(model.state_dict(), 'best.pth')
 
@@ -329,8 +327,8 @@ def run_one_epoch(model,bar,mode,loss_func,optimizer=None,show_interval=10):
                 x = get_img(x)
                 x=x.unsqueeze(2)
                 pred,loss=model(x)
-            cartoonx,__ = cartoonx_method(x[0],torch.argmax(pred[0]).detach())
-            print(cartoonx.size())
+            #cartoonx,__ = cartoonx_method(x[0],torch.argmax(pred[0]).detach())
+            #print(cartoonx.size())
 
         
         
