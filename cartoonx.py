@@ -290,9 +290,9 @@ class CartoonX:
         x_t = []
         masknum = 0
         for i in range(0, len(x), 6):
-            print(len(x[i:i+6]))
             x_t.append(x[i:i+6])
             masknum += 1
+        x_t = torch.FloatTensor(x_t)
         x_t.unsqueeze(0)
 
         idx_1 = torch.tensor(np.arange(x.size(1)), dtype=torch.int64)
