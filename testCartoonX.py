@@ -173,7 +173,7 @@ def main(cfg):
     CARTOONX_HPARAMS = {
         "l1lambda": 285., "lr": 1e-1, 'obfuscation': 'gaussian',
         "maximize_label": True, "optim_steps": 300,  
-        "noise_bs": 16, 'mask_init': 'ones'
+        "noise_bs": 1, 'mask_init': 'ones'
     } 
 
     cartoonx_method = CartoonX(model=model, device=cfg.device, **CARTOONX_HPARAMS)
