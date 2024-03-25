@@ -287,6 +287,8 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
+        print(x.size())
+        print(x[0].size())
         x_t = []
         masknum = 0
         for i in range(0, len(x[0]), 6):
