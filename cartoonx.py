@@ -290,7 +290,8 @@ class CartoonX:
         x_t = []
         masknum = 0
         for i in range(0, len(x[0]), 6):
-            x_t.append(x[i,i+5])
+            print(len(x[0]))
+            x_t.append(x[i,i+1,i+2,i+3,i+4,i+5])
             masknum += 1
         x_t.unsqueeze(0)
 
