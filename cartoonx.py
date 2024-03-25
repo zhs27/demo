@@ -297,8 +297,8 @@ class CartoonX:
 
         idx_1 = torch.tensor(np.arange(x.size(1)), dtype=torch.int64)
         idx_2 = target
-        out = self.model(x)
-        print(self.model(x))
+        out = self.model(x_t)
+        print(out)
         return out
 
 
