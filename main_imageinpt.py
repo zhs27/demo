@@ -167,6 +167,8 @@ def main(cfg):
         model=nn.DataParallel(model)
     
     if cfg.train:
+        print(1)
+        test_model(model,val_loader,cfg)
         train_model(model,train_loader,val_loader,cfg)
         torch.save(model.state_dict(), 'best.pth')
 
