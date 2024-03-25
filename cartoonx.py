@@ -100,6 +100,7 @@ class CartoonX:
         # Get total number of mask entries
         with torch.no_grad():
             num_mask = m_yl.view(m_yl.size(0), -1).size(-1) + sum([m.view(m.size(0), -1).size(-1) for m in m_yh])
+        print(num_mask)
         
         # Initialize optimizer
         opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
