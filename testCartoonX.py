@@ -164,10 +164,7 @@ def main(cfg):
     train_loader,val_loader=get_sets(data_path=cfg.data_path,fold=cfg.fold,k_way=cfg.k_way,n_shot=cfg.n_shot,query_num=cfg.query,data_aug=cfg.data_aug)
     model=fs_network(k_way=cfg.k_way,n_shot=cfg.n_shot,query=cfg.query,backbone=cfg.backbone,fs=cfg.fs_head)
 
-    exp_path=os.path.join(cfg.project_path,cfg.exp_folder_name,cfg.exp_name,'pth_file')
-    picked_pth=sorted(os.listdir(exp_path),key=lambda x:int(x.split('_')[-1]))[-1]
-    pth_file=torch.load(os.path.join(exp_path,picked_pth))
-    model.load_state_dict(pth_file['model_state'])
+    model.load_state_dict(torch.load('best.pth'))
     model=model.cuda()
 
     model.eval()
