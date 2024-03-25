@@ -111,7 +111,7 @@ class CartoonX:
                                 dtype=torch.float32,
                                 device=self.device)
         else: 
-            out_x = self.get_model_output([x], target)
+            out_x = self.get_model_output(x.unsqueeze(0), target)
        
         # Optimize wavelet mask with projected GD
         for i in range(self.optim_steps):
@@ -127,7 +127,7 @@ class CartoonX:
             obf_x = self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1)
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             targets_copied = torch.stack(self.noise_bs*[target]).T.reshape(-1)
-            out_obf = self.get_model_output(obf_x, targets_copied).reshape(x.size(0), self.noise_bs)
+            out_obf = self.get_model_output(obf_x.unsqueeze(0), targets_copied).reshape(x.size(0), self.noise_bs)
                         
             # Compute model output distortion between x and obf_x
             distortion_batch = torch.mean((out_x.unsqueeze(1) - out_obf)**2, dim=-1)
