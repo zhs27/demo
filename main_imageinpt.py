@@ -32,7 +32,7 @@ def get_arg():
     cfg.add_argument('--decay_ep',default=5,type=int)
     cfg.add_argument('--gamma',default=0.7,type=float)
     cfg.add_argument('--lr',default=1e-4,type=float)
-    cfg.add_argument('--train',action='store_true',default=True)
+    cfg.add_argument('--train',action='store_true',default=False)
     cfg.add_argument('--seed',default=0)
     cfg.add_argument('--device',default='cuda')
     cfg.add_argument('--lr_sch',default=False)
