@@ -287,13 +287,11 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        print(x.size())
-        print(x[0].size())
         x_t = []
         masknum = 0
-        for i in range(0, len(x[0]), 6):
-            print(len(x[0]))
-            x_t.append(x[i,i+1,i+2,i+3,i+4,i+5])
+        for i in range(0, len(x), 6):
+            print(len(x[i:i+6]))
+            x_t.append(x[i:i+6])
             masknum += 1
         x_t.unsqueeze(0)
 
