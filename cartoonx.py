@@ -111,7 +111,7 @@ class CartoonX:
                                 dtype=torch.float32,
                                 device=self.device)
         else: 
-            out_x = self.get_model_output(x, target)
+            out_x = self.get_model_output([x], target)
        
         # Optimize wavelet mask with projected GD
         for i in range(self.optim_steps):
