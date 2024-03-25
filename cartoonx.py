@@ -288,20 +288,12 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        x_t = []
-        masks = 0
-        for i in range(0, len(x), 6):
-            self.model(torch.stack([x[i],x[i+6],x[i+12],x[i+18],x[i+24],x[i+30]]).unsqueeze(0))
-            x_t.append()
-            
-            masks += 1
-        x_t = torch.stack(x_t)
-        x_t.unsqueeze(0)
-
+        x.unsqueeze(0)
         idx_1 = torch.tensor(np.arange(x.size(1)), dtype=torch.int64)
         idx_2 = target
-        out = self.model(x_t)
-        print(out)
+        out = self.model(x)
+        print(self.model(x))
+        
         return out
 
 
