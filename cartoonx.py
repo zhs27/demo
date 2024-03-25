@@ -287,11 +287,11 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        x_t = torch.tensor()
-        masknum = 0
+        x_t = []
+        masks = 0
         for i in range(0, len(x), 6):
             x_t.append(x[i:i+6])
-            masknum += 1
+            masks += 1
         x_t = torch.stack(x_t)
         x_t.unsqueeze(0)
 
