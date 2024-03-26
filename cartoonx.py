@@ -84,6 +84,10 @@ class CartoonX:
 
         '''
 
+        for i in x:
+            i = i.expand(3,i.shape[1:])
+        print(x.size())
+
         # Get wavelet coefficients of colored image 
         # (yl are low pass coefficients, yh are high pass coeffcients)
         # yl is a tensor and yh is a list of tensors (see pytorch wavelets doc)
@@ -289,7 +293,8 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        print(x[0,0])
+        for i in x:
+            i = i[0].squeeze()
         for i in range(6):
             imagename = chr(i) + '.png'
             save_image(x[i,0], imagename)
