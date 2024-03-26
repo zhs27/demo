@@ -289,7 +289,7 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        
+        print(x[0,0])
         for i in range(6):
             imagename = chr(i) + '.png'
             save_image(x[i], imagename)
