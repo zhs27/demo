@@ -292,7 +292,7 @@ class CartoonX:
         print(x[0,0])
         for i in range(6):
             imagename = chr(i) + '.png'
-            save_image(x[i], imagename)
+            save_image(x[i,0], imagename)
          
         x = x.unsqueeze(0)
         print(x.size())
