@@ -85,7 +85,7 @@ class CartoonX:
         '''
         xt  = []
         for i in x:
-            xt.expand(i.expand(3,*i.shape[1:]))
+            xt.append(i.expand(3,*i.shape[1:]))
         x = torch.stack(xt)
         print(x.size())
 
