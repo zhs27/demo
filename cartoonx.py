@@ -296,6 +296,7 @@ class CartoonX:
         idx_2 = target
         out = self.model(x)
         print(out)
+        print(target)
         
         return out
 
