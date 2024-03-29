@@ -108,12 +108,12 @@ class CartoonX:
         
         
         # Initialize optimizer
-        m_yl = torch.stack(m_yl)
-        for m in m_yh: m = torch.stack(m)
-        print(len(m_yh))
-        print(m_yh[0].size())
-        m_yh = torch.stack(m_yh)
-        opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
+        optpara = []
+        for (ml,mh) in zip(m_y1,m_yh): 
+            optpara.append([ml] + mh)
+
+        opt = torch.optim.Adam(optpara, lr=self.lr)
+        #opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
         
         # Get reference output for distortion
         if self.maximize_label:
