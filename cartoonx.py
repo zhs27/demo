@@ -74,6 +74,7 @@ class CartoonX:
             y1,y2 = self.forward_dwt(i)
             self.compute_obfuscation_strategy(y1, y2)
             m_y1,m_y2 = self.get_init_mask(y1, y2) 
+            print(m_y1.size())
             yl.append(y1)
             yh.append(y2)
             m_yl.append(m_y1)
