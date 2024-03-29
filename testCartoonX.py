@@ -185,7 +185,7 @@ def main(cfg):
         with torch.no_grad():
             x = get_img(x)
             x=x.unsqueeze(2)
-            pred,loss=model(x)
+            pred,loss=model(x[0].unsqueeze())
         print(x[0].unsqueeze(0).size())
         cartoonx,__ = cartoonx_method(x[0],torch.argmax(pred[0]).unsqueeze(0).detach())
         
