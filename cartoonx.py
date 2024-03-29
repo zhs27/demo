@@ -66,8 +66,8 @@ class CartoonX:
         l1wavelet_loss = []
         distortion_loss = []
 
-        '''
-        # apply dwt on all images
+        
+        #apply dwt on all images
         yl = []
         yh = []
         for i in x[0]:
@@ -79,11 +79,14 @@ class CartoonX:
             m_yl.append(m_y1)
             m_yh.append(m_y2)
 
-
+        yl = torch.stack(yl)
+        yh = torch.stack(yh)
+        m_yl = torch.stack(yl)
+        m_yh = torch.stack(yh)
         # compute obfuscation strategy
 
+        
         '''
-
         # Get wavelet coefficients of colored image 
         # (yl are low pass coefficients, yh are high pass coeffcients)
         # yl is a tensor and yh is a list of tensors (see pytorch wavelets doc)
@@ -98,8 +101,10 @@ class CartoonX:
         # Initialize mask on wavelet coefficients yl and yh
         m_yl, m_yh = self.get_init_mask(yl, yh)
         
+        '''
         # Get total number of mask entries
         with torch.no_grad():
+            num_mask = 0
             num_mask = m_yl.view(m_yl.size(0), -1).size(-1) + sum([m.view(m.size(0), -1).size(-1) for m in m_yh])
         
         # Initialize optimizer
@@ -112,7 +117,7 @@ class CartoonX:
                                 dtype=torch.float32,
                                 device=self.device)
         else: 
-            out_x = self.get_model_output(x.unsqueeze(0), target)
+            out_x = self.get_model_output(x, target)
        
         # Optimize wavelet mask with projected GD
         for i in range(self.optim_steps):
@@ -288,8 +293,6 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        
-
         idx_1 = torch.tensor(np.arange(x.size(1)), dtype=torch.int64)
         idx_2 = target
         out = self.model(x)
