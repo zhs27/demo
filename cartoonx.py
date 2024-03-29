@@ -75,14 +75,14 @@ class CartoonX:
         for i in x:
             y1,y2 = self.forward_dwt(i)
             self.compute_obfuscation_strategy(y1, y2)
+            print(y1.size())
             m_y1,m_y2 = self.get_init_mask(y1, y2) 
             yl.append(y1)
             yh.append(y2)
             m_yl.append(m_y1)
             m_yh.append(m_y2)
-            
-        m_yl = torch.stack(yl)
-        m_yh = torch.stack(yh)
+
+    
         # compute obfuscation strategy
 
         
