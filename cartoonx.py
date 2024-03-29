@@ -295,7 +295,7 @@ class CartoonX:
         idx_1 = torch.tensor(np.arange(x.size(1)), dtype=torch.int64)
         idx_2 = target
         out,loss = self.model(x)
-        ret = out[:,out]
+        ret = out[:,target]
         
         return ret
 
