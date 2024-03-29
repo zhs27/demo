@@ -298,7 +298,7 @@ class CartoonX:
         ret = []
         for i in range(len(target)):
             ret.append(out[i, target[i]])
-        print(ret.size())
+        print(ret)
         print(out.size())
         
         return ret
