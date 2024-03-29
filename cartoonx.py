@@ -296,8 +296,10 @@ class CartoonX:
         idx_2 = target
         out,loss = self.model(x)
         ret = []
+        
         for i in range(len(target)):
             ret.append(out[i, target[i]])
+        ret = torch.stack(ret)
         print(ret)
         print(out.size())
         
