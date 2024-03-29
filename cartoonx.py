@@ -100,11 +100,12 @@ class CartoonX:
         # Initialize mask on wavelet coefficients yl and yh
         m_yl, m_yh = self.get_init_mask(yl, yh)
         
-        '''
+        
         # Get total number of mask entries
         with torch.no_grad():
             num_mask = 0
             num_mask = m_yl.view(m_yl.size(0), -1).size(-1) + sum([m.view(m.size(0), -1).size(-1) for m in m_yh])
+        '''
         
         # Initialize optimizer
         opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
