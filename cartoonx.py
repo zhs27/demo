@@ -296,6 +296,7 @@ class CartoonX:
         idx_2 = target
         out,loss = self.model(x)
         ret = out[:,target]
+        print(target)
         print(ret.size())
         
         return ret
