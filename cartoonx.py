@@ -8,7 +8,7 @@ from torchvision.utils import save_image
 
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")   
-DWT_DEFAULT_PARAMS = {'mode': 'zero', 'wave': 'db3', 'J': 5}
+DWT_DEFAULT_PARAMS = {'mode': 'zero', 'wave': 'haar', 'J': 1}
 softmax = torch.nn.Softmax(dim=-1)
 
 class CartoonX:
