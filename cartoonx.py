@@ -289,9 +289,6 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        for i in range(6):
-            imagename = chr(i) + '.png'
-            save_image(x[i,0], imagename)
          
         x = x.unsqueeze(0)
         print(x.size())
