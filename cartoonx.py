@@ -83,11 +83,6 @@ class CartoonX:
         # compute obfuscation strategy
 
         '''
-        xt  = []
-        for i in x:
-            xt.append(i.expand(3,*i.shape[1:]))
-        x = torch.stack(xt)
-        print(x.size())
 
         # Get wavelet coefficients of colored image 
         # (yl are low pass coefficients, yh are high pass coeffcients)
@@ -294,9 +289,6 @@ class CartoonX:
 
 
     def get_model_output(self, x, target):
-        for i in x:
-            i = i[0].squeeze()
-        print(x.size())
         for i in range(6):
             imagename = chr(i) + '.png'
             save_image(x[i,0], imagename)
