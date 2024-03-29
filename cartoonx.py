@@ -294,10 +294,9 @@ class CartoonX:
     def get_model_output(self, x, target):
         idx_1 = torch.tensor(np.arange(x.size(1)), dtype=torch.int64)
         idx_2 = target
-        out = self.model(x)
-        print(out)
-        print(target)
+        out,loss = self.model(x)
+        ret = out[:,out]
         
-        return out
+        return ret
 
 
