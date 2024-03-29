@@ -81,10 +81,6 @@ class CartoonX:
             yh.append(y2)
             m_yl.append(m_y1)
             m_yh.append(m_y2)
-        yl = torch.stack(yl, dim=0)
-        yh = torch.stack(yl, dim=0)
-        m_yl = torch.stack(m_yl, dim=0)
-        m_yh = torch.stack(m_yh, dim=0)
     
         # compute obfuscation strategy
 
