@@ -80,7 +80,7 @@ class CartoonX:
             optpara.append([m_y1] + m_y2)
             yl.append(y1)
             yh.append(y2)
-            m_yl.append(m_y1)
+            m_yl.append(torch.stack(m_y1))
             m_yh.append(m_y2)
 
         print(len(m_yl))
