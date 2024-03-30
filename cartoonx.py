@@ -83,9 +83,6 @@ class CartoonX:
             m_yl.append(torch.stack(m_y1))
             m_yh.append(m_y2)
         
-        yl = torch.tensor(yl)
-        print(len(m_yh))
-        print(len(m_yh[0]))
         # compute obfuscation strategy
 
         
