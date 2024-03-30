@@ -145,7 +145,7 @@ class CartoonX:
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             obf_x = torch.stack(obf_x)
             print("obf", obf_x.size())
-            targets_copied = torch.stack(self.noise_bs*[target]).T.reshape(-1)
+            targets_copied = target
             print("targ:", targets_copied)
             out_obf = self.get_model_output(obf_x, targets_copied).reshape(x.size(0), self.noise_bs)
                         
