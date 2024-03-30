@@ -82,7 +82,8 @@ class CartoonX:
             yh.append(y2)
             m_yl.append(torch.stack(m_y1))
             m_yh.append(m_y2)
-
+        
+        yl = torch.tensor(yl)
         print(len(m_yh))
         print(len(m_yh[0]))
         # compute obfuscation strategy
@@ -131,11 +132,11 @@ class CartoonX:
         for i in range(self.optim_steps):
             print(f'\rIter {i}/{self.optim_steps}', end='')
             obf_x = []
-            for myh,myl in zip(m_yh,m_yl):
+            for myh,myl,yll in zip(m_yh,m_yl,yl):
                 # Get perturbation on wavelet coefficients yl and yh
                 p_yl, p_yh = self.get_perturbation()
                 # Obfuscate wavelet coefficients yl
-                obf_yl = myl.unsqueeze(1) * yl.unsqueeze(1) + (1 - myl.unsqueeze(1)) * p_yl
+                obf_yl = myl.unsqueeze(1) * yll.unsqueeze(1) + (1 - myl.unsqueeze(1)) * p_yl
                 # Obfuscate wavelet coefficients yh
                 obf_yh = []
                 for y, m, p in zip(yh, myh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
