@@ -111,12 +111,12 @@ class CartoonX:
         
         
         # Initialize optimizer
-
+        '''
         opt = []
         for i in optpara:
             opt.append(torch.optim.Adam(optpara, lr=self.lr))
         #opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
-        
+        '''
         # Get reference output for distortion
         if self.maximize_label:
             out_x =  torch.ones((x.size(0),),
@@ -129,16 +129,17 @@ class CartoonX:
         # Optimize wavelet mask with projected GD
         for i in range(self.optim_steps):
             print(f'\rIter {i}/{self.optim_steps}', end='')
-            # Get perturbation on wavelet coefficients yl and yh
-            p_yl, p_yh = self.get_perturbation()
-            # Obfuscate wavelet coefficients yl
-            obf_yl = m_yl.unsqueeze(1) * yl.unsqueeze(1) + (1 - m_yl.unsqueeze(1)) * p_yl
-            # Obfuscate wavelet coefficients yh
-            obf_yh = []
-            for y, m, p in zip(yh, m_yh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
-            # Get obfuscation in pixel space by applying inverse dwt and projecting into [0,1]
-            obf_x = self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1)
-            print(obf_x.size())
+            obf_x = []
+            for myh,myl in zip(m_yh,m_yl):
+                # Get perturbation on wavelet coefficients yl and yh
+                p_yl, p_yh = self.get_perturbation()
+                # Obfuscate wavelet coefficients yl
+                obf_yl = myl.unsqueeze(1) * yl.unsqueeze(1) + (1 - myl.unsqueeze(1)) * p_yl
+                # Obfuscate wavelet coefficients yh
+                obf_yh = []
+                for y, m, p in zip(yh, m_yh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
+                # Get obfuscation in pixel space by applying inverse dwt and projecting into [0,1]
+                obf_x.apppend(self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1))
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             targets_copied = torch.stack(self.noise_bs*[target]).T.reshape(-1)
             out_obf = self.get_model_output(obf_x, targets_copied).reshape(x.size(0), self.noise_bs)
