@@ -84,7 +84,6 @@ class CartoonX:
             yh.append(y2)
             m_yl.append(m_y1)
             m_yh.append(m_y2)
-        print("ylsize:", len(yl))
         
         # compute obfuscation strategy
 
@@ -144,9 +143,7 @@ class CartoonX:
                 obf_x.append(self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1))
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             obf_x = torch.stack(obf_x)
-            print("obf", obf_x.size())
             targets_copied = target
-            print("targ:", targets_copied)
             out_obf = self.get_model_output(obf_x, targets_copied)
             print("obf_out:", out_obf)
                         
@@ -154,8 +151,10 @@ class CartoonX:
             distortion_batch = torch.mean((out_x.unsqueeze(1) - out_obf)**2, dim=-1)
             distortion = distortion_batch.sum()
             # Compute l1 norm of wavelet coefficients
-            l1waveletcoefs = m_yl.abs().sum() 
-            for m in m_yh: l1waveletcoefs += m.abs().sum()
+            for m in m_yl: l1waveletcoefs += m.abs().sum() 
+            for m in m_yh:
+                for n in m: 
+                    l1waveletcoefs += n.abs().sum()
             l1waveletcoefs /= num_mask
             
             # Log losses
