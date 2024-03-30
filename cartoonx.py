@@ -83,7 +83,7 @@ class CartoonX:
             m_yl.append(m_y1)
             m_yh.append(m_y2)
 
-    
+        print(len(m_yl))
         # compute obfuscation strategy
 
         
@@ -137,7 +137,7 @@ class CartoonX:
                 obf_yl = myl.unsqueeze(1) * yl.unsqueeze(1) + (1 - myl.unsqueeze(1)) * p_yl
                 # Obfuscate wavelet coefficients yh
                 obf_yh = []
-                for y, m, p in zip(yh, m_yh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
+                for y, m, p in zip(yh, myh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
                 # Get obfuscation in pixel space by applying inverse dwt and projecting into [0,1]
                 obf_x.apppend(self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1))
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
@@ -302,13 +302,10 @@ class CartoonX:
 
     def get_model_output(self, x, target):
         out,_ = self.model(x)
-        ret = []
-        
+        ret = []   
         for i,j in zip(out,target):
             ret.append(i[j])
         ret = torch.stack(ret)
-        print(ret)
-        print(out.size())
         
         return ret
 
