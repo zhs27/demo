@@ -142,6 +142,7 @@ class CartoonX:
                 obf_x.append(self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1))
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             obf_x = torch.stack(obf_x)
+            print("obf", obf_x.size())
             targets_copied = torch.stack(self.noise_bs*[target]).T.reshape(-1)
             print("targ:", targets_copied)
             out_obf = self.get_model_output(obf_x, targets_copied).reshape(x.size(0), self.noise_bs)
