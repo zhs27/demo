@@ -81,8 +81,8 @@ class CartoonX:
             m_yl.append(m_y1)
             m_yh.append(m_y2)
 
-        print(m_yl.size())
-        print(m_yh.size())
+        print(m_yl[0].size())
+        print(len(m_yh[0]))
     
         # compute obfuscation strategy
 
