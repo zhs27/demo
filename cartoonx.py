@@ -151,6 +151,8 @@ class CartoonX:
             distortion_batch = torch.mean((out_x.unsqueeze(1) - out_obf)**2, dim=-1)
             distortion = distortion_batch.sum()
             # Compute l1 norm of wavelet coefficients
+
+            l1wavelet_loss = 0
             for m in m_yl: l1waveletcoefs += m.abs().sum() 
             for m in m_yh:
                 for n in m: 
