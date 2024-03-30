@@ -81,8 +81,6 @@ class CartoonX:
             m_yl.append(m_y1)
             m_yh.append(m_y2)
 
-        print(m_yl[0].size())
-        print(len(m_yh[0]))
     
         # compute obfuscation strategy
 
@@ -112,7 +110,7 @@ class CartoonX:
         
         # Initialize optimizer
         optpara = []
-        for (ml,mh) in zip(m_y1,m_yh):
+        for (ml,mh) in zip(m_yl,m_yh):
             optpara.append(torch.stack([ml] + mh))
         optpara = optpara.stack(optpara)
 
