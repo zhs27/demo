@@ -111,9 +111,10 @@ class CartoonX:
         
         
         # Initialize optimizer
-        optpara = torch.stack(optpara)
 
-        opt = torch.optim.Adam(optpara, lr=self.lr)
+        opt = []
+        for i in optpara:
+            opt.append(torch.optim.Adam(optpara, lr=self.lr))
         #opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
         
         # Get reference output for distortion
