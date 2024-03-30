@@ -148,6 +148,7 @@ class CartoonX:
             targets_copied = target
             print("targ:", targets_copied)
             out_obf = self.get_model_output(obf_x, targets_copied)
+            print("obf_out:", out_obf)
                         
             # Compute model output distortion between x and obf_x
             distortion_batch = torch.mean((out_x.unsqueeze(1) - out_obf)**2, dim=-1)
