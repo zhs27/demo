@@ -111,7 +111,7 @@ class CartoonX:
         
         
         # Initialize optimizer
-        optpara = optpara.stack(optpara)
+        optpara = torch.stack(optpara)
 
         opt = torch.optim.Adam(optpara, lr=self.lr)
         #opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
