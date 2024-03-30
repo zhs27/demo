@@ -65,7 +65,7 @@ class CartoonX:
         # Initialize optimization loss tracking
         l1wavelet_loss = []
         distortion_loss = []
-        print(target.size())
+        print("t:", target.size())
 
         
         #apply dwt on all images
@@ -143,7 +143,7 @@ class CartoonX:
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             obf_x = torch.stack(obf_x)
             targets_copied = torch.stack(self.noise_bs*[target]).T.reshape(-1)
-            print(targets_copied)
+            print("targ:", targets_copied)
             out_obf = self.get_model_output(obf_x, targets_copied).reshape(x.size(0), self.noise_bs)
                         
             # Compute model output distortion between x and obf_x
@@ -304,7 +304,7 @@ class CartoonX:
 
     def get_model_output(self, x, target):
         out,_ = self.model(x)
-        print(out.size())
+        print("out",out.size())
         ret = []   
         for i,j in zip(out,target):
             ret.append(i[j])
