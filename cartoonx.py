@@ -152,7 +152,7 @@ class CartoonX:
             distortion = distortion_batch.sum()
             # Compute l1 norm of wavelet coefficients
 
-            l1wavelet_loss = 0
+            l1waveletcoefs = 0
             for m in m_yl: l1waveletcoefs += m.abs().sum() 
             for m in m_yh:
                 for n in m: 
