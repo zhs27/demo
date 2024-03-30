@@ -129,14 +129,14 @@ class CartoonX:
         for i in range(self.optim_steps):
             print(f'\rIter {i}/{self.optim_steps}', end='')
             obf_x = []
-            for myh,myl,yll in zip(m_yh,m_yl,yl):
+            for myh,myl,yll,yhh in zip(m_yh,m_yl,yl,yh):
                 # Get perturbation on wavelet coefficients yl and yh
                 p_yl, p_yh = self.get_perturbation()
                 # Obfuscate wavelet coefficients yl
                 obf_yl = myl.unsqueeze(1) * yll.unsqueeze(1) + (1 - myl.unsqueeze(1)) * p_yl
                 # Obfuscate wavelet coefficients yh
                 obf_yh = []
-                for y, m, p in zip(yh, myh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
+                for y, m, p in zip(yhh, myh, p_yh): obf_yh.append((m.unsqueeze(1)*y.unsqueeze(1)+(1-m.unsqueeze(1))*p))
                 # Get obfuscation in pixel space by applying inverse dwt and projecting into [0,1]
                 obf_x.apppend(self.inverse_dwt((obf_yl.reshape(-1, *obf_yl.shape[2:]), [o.reshape(-1,*o.shape[2:]) for o in obf_yh])).clamp(0,1))
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
