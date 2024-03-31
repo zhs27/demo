@@ -187,7 +187,7 @@ class CartoonX:
         print(yl[0].size())
         cartoonx_per_rgb = []
         for myl,myh,l,h in (m_yl,m_yh,yl,yh):
-            
+            pass
         cartoonx_per_rgb = [
                 self.inverse_dwt(
                     (m_yl.detach()*yl[:,i,:,:].unsqueeze(1), 
