@@ -74,13 +74,13 @@ class CartoonX:
         m_yl = []
         m_yh = []
         optpara = []
-        print(x.size())
+        opt = []
         for i in x:
             y1,y2 = self.forward_dwt(i)
             self.compute_obfuscation_strategy(y1, y2)
             m_y1,m_y2 = self.get_init_mask(y1,y2)
             m_y2 = torch.stack(m_y2)
-            optpara.append([m_y1] + m_y2)
+            opt.append([m_y1]+m_y2)
             yl.append(y1)
             yh.append(y2)
             m_yl.append(m_y1)
@@ -314,7 +314,6 @@ class CartoonX:
 
     def get_model_output(self, x, target):
         out,_ = self.model(x)
-        print("out",out.size())
         ret = []   
         for i,j in zip(out,target):
             ret.append(i[j])
