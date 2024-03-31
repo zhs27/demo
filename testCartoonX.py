@@ -196,6 +196,7 @@ def main(cfg):
             picname2 = 'cartoonx' + str(j) + '.png'
             save_image(x[0,j],picname1)
             save_image(cartoonx[0,j],picname2)
+            quit
 
 
         #cartoonx, history_cartoonx = cartoonx_method(x, pred)
