@@ -188,6 +188,7 @@ def main(cfg):
             pred,loss=model(x)
         cartoonx = cartoonx_method(x,torch.argmax(pred, dim = 1).detach())
         
+        cartoonx = torch.stack(cartoonx)
         print(cartoonx.size())
 
         #cartoonx, history_cartoonx = cartoonx_method(x, pred)
