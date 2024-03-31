@@ -74,7 +74,7 @@ class CartoonX:
         m_yl = []
         m_yh = []
         optpara = []
-        opt = []
+        opts = []
         for i in x:
             y1,y2 = self.forward_dwt(i)
             self.compute_obfuscation_strategy(y1, y2)
@@ -168,9 +168,10 @@ class CartoonX:
             # Compute optiimization loss
             loss = distortion + self.l1lambda * l1waveletcoefs 
             # Perform optimization step
-            opt.zero_grad()
-            loss.backward()
-            opt.step()
+            for opt in opts:
+                opt.zero_grad()
+                loss.backward()
+                opt.step()
 
             # Project masks into [0,1]
             with torch.no_grad():
