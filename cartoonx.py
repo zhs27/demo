@@ -203,7 +203,9 @@ class CartoonX:
         ]
         '''
         # Final explanation
-        cartoonx = torch.cat(cartoonx_per_rgb, dim=1).clamp(0,1)
+        cartoonx = []
+        for i in cartoonx_per_rgb:
+            cartoonx.append(torch.cat(i, dim=1).clamp(0,1))
         #assert tuple(cartoonx.shape)==tuple(x.shape), cartoonx.shape
 
         '''
