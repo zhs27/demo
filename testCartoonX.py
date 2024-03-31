@@ -186,7 +186,7 @@ def main(cfg):
             x = get_img(x)
             x=x.unsqueeze(2)
             pred,loss=model(x)
-        cartoonx,__ = cartoonx_method(x,torch.argmax(pred, dim = 1).detach())
+        cartoonx = cartoonx_method(x,torch.argmax(pred, dim = 1).detach())
         
         print(cartoonx.size())
 

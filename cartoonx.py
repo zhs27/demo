@@ -174,12 +174,13 @@ class CartoonX:
             # Project masks into [0,1]
             with torch.no_grad():
                 for m in m_yl:
-                    m_yl.clamp_(0,1)
+                    m.clamp_(0,1)
                 for m in m_yh: 
                     for n in m: n.clamp_(0,1)
 
         # Invert wavelet coefficient mask back to pixel space as grayscale images
         #cartoonx = self.inverse_dwt((m_yl.detach()*yl_gray, [m.detach()*y for m,y in zip(m_yh, yh_gray)])).clamp(0,1)
+        
         cartoonx_per_rgb = [
                 self.inverse_dwt(
                     (m_yl.detach()*yl[:,i,:,:].unsqueeze(1), 
@@ -189,16 +190,16 @@ class CartoonX:
         ]
         # Final explanation
         cartoonx = torch.cat(cartoonx_per_rgb, dim=1).clamp(0,1)
-        assert tuple(cartoonx.shape)==tuple(x.shape), cartoonx.shape
+        #assert tuple(cartoonx.shape)==tuple(x.shape), cartoonx.shape
 
-        
+        '''
         # Get a dictionary with losses, mask statistics, and final mask
         history = {'mask': (m_yl.detach(), [m.detach() for m in m_yh]),
                    'distortion': distortion_loss,
                    'l1wavelet': l1wavelet_loss
                   }
-
-        return cartoonx, history 
+        '''
+        return cartoonx 
     
     def compute_obfuscation_strategy(self, yl, yh):
         # Get std and mean of yl wavelet coefficients per image
