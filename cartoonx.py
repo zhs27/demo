@@ -170,7 +170,9 @@ class CartoonX:
             # Perform optimization step
             for opt in opts:
                 opt.zero_grad()
-                loss.backward()
+                
+            loss.backward()
+            for opt in opts:
                 opt.step()
 
             # Project masks into [0,1]
