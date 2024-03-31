@@ -2,7 +2,7 @@ import torch
 from tqdm import tqdm
 import argparse
 import numpy as np
-
+from torchvision.utils import save_image
 
 # from Dataloader.model_net_cross_val import get_sets
 # from Dataloader.scanobjectnn_cross_val import get_sets
@@ -181,6 +181,7 @@ def main(cfg):
     
 
     for i, (x_cpu,y_cpu) in enumerate(bar):
+
         x,y=x_cpu.to(cfg.device),y_cpu.to(cfg.device)
         with torch.no_grad():
             x = get_img(x)
@@ -190,9 +191,15 @@ def main(cfg):
         
         cartoonx = torch.stack(cartoonx)
         print(cartoonx.size())
+        for j in range(6):
+            picname1 = str(j) + '.png'
+            picname2 = 'cartoonx' + str(j) + '.png'
+            save_image(x[0,j],picname1)
+            save_image(cartoonx[0,j],picname2)
+
 
         #cartoonx, history_cartoonx = cartoonx_method(x, pred)
-        if(i == 1):
+        if(i == 0):
             quit    
 
 
