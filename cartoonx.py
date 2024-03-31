@@ -193,6 +193,7 @@ class CartoonX:
                     )
                 ) for i in [0]
                 )
+        print(cartoonx_per_rgb[0].size())
         '''
         cartoonx_per_rgb = [
                 self.inverse_dwt(
