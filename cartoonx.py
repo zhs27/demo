@@ -184,7 +184,10 @@ class CartoonX:
 
         # Invert wavelet coefficient mask back to pixel space as grayscale images
         #cartoonx = self.inverse_dwt((m_yl.detach()*yl_gray, [m.detach()*y for m,y in zip(m_yh, yh_gray)])).clamp(0,1)
-        
+        print(yl[0].size())
+        cartoonx_per_rgb = []
+        for myl,myh,l,h in (m_yl,m_yh,yl,yh):
+            
         cartoonx_per_rgb = [
                 self.inverse_dwt(
                     (m_yl.detach()*yl[:,i,:,:].unsqueeze(1), 
