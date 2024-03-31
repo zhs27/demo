@@ -186,15 +186,22 @@ class CartoonX:
         #cartoonx = self.inverse_dwt((m_yl.detach()*yl_gray, [m.detach()*y for m,y in zip(m_yh, yh_gray)])).clamp(0,1)
         print(yl[0].size())
         cartoonx_per_rgb = []
-        for myl,myh,l,h in (m_yl,m_yh,yl,yh):
-            pass
+        for myl,myh,l,h in zip(m_yl,m_yh,yl,yh):
+            cartoonx_per_rgb.append(self.inverse_dwt(
+                    (myl.detach()*l[:,i,:,:].unsqueeze(1), 
+                     [m.detach()*y[:,i,:,:,:].unsqueeze(1) for m,y in zip(myh, h)]
+                    )
+                ) for i in [0]
+                )
+        '''
         cartoonx_per_rgb = [
                 self.inverse_dwt(
                     (m_yl.detach()*yl[:,i,:,:].unsqueeze(1), 
                      [m.detach()*y[:,i,:,:,:].unsqueeze(1) for m,y in zip(m_yh, yh)]
                     )
-                ) for i in [0,1,2]
+                ) for i in [0]
         ]
+        '''
         # Final explanation
         cartoonx = torch.cat(cartoonx_per_rgb, dim=1).clamp(0,1)
         #assert tuple(cartoonx.shape)==tuple(x.shape), cartoonx.shape
