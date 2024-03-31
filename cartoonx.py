@@ -193,7 +193,7 @@ class CartoonX:
                     )
                 ) for i in [0]
                 )
-        print(cartoonx_per_rgb[0].size())
+        
         '''
         cartoonx_per_rgb = [
                 self.inverse_dwt(
@@ -206,7 +206,7 @@ class CartoonX:
         # Final explanation
         cartoonx = []
         for i in cartoonx_per_rgb:
-            cartoonx.append(torch.cat(i, dim=1).clamp(0,1))
+            cartoonx.append(i.clamp(0,1))
         #assert tuple(cartoonx.shape)==tuple(x.shape), cartoonx.shape
 
         '''
