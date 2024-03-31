@@ -80,7 +80,7 @@ class CartoonX:
             self.compute_obfuscation_strategy(y1, y2)
             m_y1,m_y2 = self.get_init_mask(y1,y2)
             m_y2 = torch.stack(m_y2)
-            opt.append([m_y1]+m_y2)
+            opt.append(torch.optim.Adam([m_y1]+m_y2, lr=self.lr))
             yl.append(y1)
             yh.append(y2)
             m_yl.append(m_y1)
@@ -113,11 +113,11 @@ class CartoonX:
         
         
         # Initialize optimizer
-        
+        '''
         opt = []
         for i in optpara:
             opt.append(torch.optim.Adam(optpara, lr=self.lr))
-        
+        '''
         #opt = torch.optim.Adam(m_yl, lr=self.lr)
         
         # Get reference output for distortion
