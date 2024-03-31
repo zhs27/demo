@@ -171,7 +171,7 @@ class CartoonX:
             for opt in opts:
                 opt.zero_grad()
                 
-            loss.backward()
+            loss.backward(retain_graph=True)
             for opt in opts:
                 opt.step()
 
