@@ -120,7 +120,7 @@ class view_pooling_attention(nn.Module):
 
 
 
-class ViewNet(nn.Module):
+class ViewNetpt(nn.Module):
     def __init__(self):
         super().__init__()
         self.pcview=PCViews()

@@ -15,6 +15,7 @@ from model.backbone.mymodel_moreview import ViewNet
 from model.backbone.model_imginpt import ViewNetimginpt
 from model.backbone.mymodel_pointview import pointview
 from model.backbone.PointTransformer import PointTransformerCls
+from model.backbone.newmodel_ViewnetQ import ViewNetpt
 # =============================
 
 
@@ -75,6 +76,10 @@ class fs_network(nn.Module):
             print("ViewNetimg is loaded")
             return ViewNetimginpt()
         
+        elif backbone=='ViewNetpt':
+            print("ViewNetpt is loaded")
+            return ViewNetpt()
+        
         else:
             raise ValueError('Illegal Backbone')
 
@@ -125,7 +130,7 @@ class fs_network(nn.Module):
             embeding = self.backbone(x, model)
         else:
             embeding=self.backbone(x)
-            
+
         pred,loss=self.fs_head(embeding,[self.s_label,self.q_label])
         
         if torch.isnan(loss):
