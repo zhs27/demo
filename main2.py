@@ -244,7 +244,7 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
                             'cfm':conf_mat}
             torch.save(presummary_saved,os.path.join(pth_path,'pre_epoch_{}'.format(e)))
         
-        for name,val in summary.items():
+        for name,val in presummary.items():
             tensorboard.add_scalar(name,val,e)
 
     tqdm_epochs=tqdm(range(cfg.epochs),unit='epoch',ncols=100)
