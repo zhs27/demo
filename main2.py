@@ -343,7 +343,7 @@ def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=
             optimizerQ.step()
 
             #Update model Qh in every N batches# 
-            if i % upfreq == 0:
+            if i % upfreq == 0 and modelQh != None:
                 modelQh.load_state_dict(modelQ.state_dict())   
 
         else:
