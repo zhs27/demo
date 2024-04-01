@@ -227,7 +227,7 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
         # === get 95% interval =====
         std_acc=np.std(batch_acc_list)
         interval=1.960*(std_acc/np.sqrt(len(batch_acc_list)))
-        interval_list.append(interval)
+        preinterval_list.append(interval)
 
         premax_acc_index=np.argmax(pretrain_acclist)
         premax_ac=pretrain_acclist[premax_acc_index]
