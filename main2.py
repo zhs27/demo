@@ -361,7 +361,7 @@ def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=
             if i%show_interval==0:
                 bar.set_description("Loss: %.3f"%(np.mean(summary['loss'])))
         else:
-            batch_cfm=cal_cfm(pred,modelQh.q_label, ncls=cfg.k_way)
+            batch_cfm=cal_cfm(pred,modelQ.q_label, ncls=cfg.k_way)
             batch_acc=np.trace(batch_cfm)/np.sum(batch_cfm)
 
 
