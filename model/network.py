@@ -116,12 +116,16 @@ class fs_network(nn.Module):
              
      
     
-    def forward(self,x):
+    def forward(self,x,model = None):
         '''
         If backbone is the gait related network
         the embeding shape is (bin,sample_num,feat_dim), like (62,20,256)
         '''
-        embeding=self.backbone(x)
+        if model != None:
+            embeding = self.backbone(x, model)
+        else:
+            embeding=self.backbone(x)
+            
         pred,loss=self.fs_head(embeding,[self.s_label,self.q_label])
         
         if torch.isnan(loss):
