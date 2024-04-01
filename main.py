@@ -181,7 +181,7 @@ def train_model(model,train_loader,val_loader,cfg):
         mean_acc=np.mean(epsum['acc'])
         summary={'meac':mean_acc}
         summary["loss/valid"]=np.mean(epsum['loss'])
-        return summary,epsum['cfm'],epsum['acc'],epsum['accintype']
+        return summary,epsum['cfm'],epsum['acc']
     
     
     # ======== define exp path ===========
