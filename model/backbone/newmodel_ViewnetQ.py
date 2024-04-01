@@ -207,11 +207,11 @@ class ViewNetpt(nn.Module):
             cartoonx_method = CartoonX(model=modelQh, device='cuda', **CARTOONX_HPARAMS)
             pred,loss=modelQh(inpt)
             cartoonx = cartoonx_method(inpt,torch.argmax(pred, dim = 1).detach())
-            inpt_hat = cartoonx
+            inpt = cartoonx
         
 
         
-        x=self.set_layer1(inpt_hat)
+        x=self.set_layer1(inpt)
         x=self.set_layer2(x)
         
         gl = self.gl_layer1(self.vp1(x))
