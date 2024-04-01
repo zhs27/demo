@@ -348,6 +348,8 @@ def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=
 
         else:
             with torch.no_grad():
+                x = get_img(x)
+                x=x.unsqueeze(2)
                 pred,loss=modelQ(x)
         
         
