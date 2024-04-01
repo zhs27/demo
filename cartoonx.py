@@ -65,7 +65,6 @@ class CartoonX:
         # Initialize optimization loss tracking
         l1wavelet_loss = []
         distortion_loss = []
-        print("t:", target.size())
 
         
         #apply dwt on all images
@@ -131,7 +130,6 @@ class CartoonX:
        
         # Optimize wavelet mask with projected GD
         for i in range(self.optim_steps):
-            print(f'\rIter {i}/{self.optim_steps}', end='')
             obf_x = []
             for myh,myl,yll,yhh in zip(m_yh,m_yl,yl,yh):
                 # Get perturbation on wavelet coefficients yl and yh
@@ -146,9 +144,7 @@ class CartoonX:
             # Get model output for obfuscation (need to have one copy for each noise perturbation sample)
             obf_x = torch.stack(obf_x)
             targets_copied = target
-            out_obf = self.get_model_output(obf_x, targets_copied)
-            print("obf_out:", out_obf)
-                        
+            out_obf = self.get_model_output(obf_x, targets_copied)                        
             # Compute model output distortion between x and obf_x
             distortion_batch = torch.mean((out_x.unsqueeze(1) - out_obf)**2, dim=-1)
             distortion = distortion_batch.sum()
@@ -184,7 +180,6 @@ class CartoonX:
 
         # Invert wavelet coefficient mask back to pixel space as grayscale images
         #cartoonx = self.inverse_dwt((m_yl.detach()*yl_gray, [m.detach()*y for m,y in zip(m_yh, yh_gray)])).clamp(0,1)
-        print(yl[0].size())
         cartoonx = []
         for myl,myh,l,h in zip(m_yl,m_yh,yl,yh):
             cartoonx_per_rgb = self.inverse_dwt(
