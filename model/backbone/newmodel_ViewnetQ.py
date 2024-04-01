@@ -207,7 +207,7 @@ class ViewNetpt(nn.Module):
             cartoonx_method = CartoonX(model=modelQh, device='cuda', **CARTOONX_HPARAMS)
             pred,loss=modelQh(inpt)
             cartoonx = cartoonx_method(inpt,torch.argmax(pred, dim = 1).detach())
-            inpt = cartoonx
+            inpt = torch.stack(cartoonx)
         
 
         
