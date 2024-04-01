@@ -9,6 +9,8 @@ import numpy as np
 
 from util.get_acc import cal_cfm
 import torch.nn as nn
+from util.pcview import PCViews
+
 
 # ======== load model =========
 from model.network import fs_network
@@ -170,16 +172,16 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
         lr_scheduleQh=torch.optim.lr_scheduler.MultiStepLR(optimizerQh,milestones=np.arange(10,cfg.epochs,cfg.decay_ep),gamma=cfg.gamma)
     
 
-    def train_one_epoch(m1, m2 = None):
+    def train_one_epoch(m1, m2, optimizer):
         bar=tqdm(train_loader,ncols=100,unit='batch',leave=False)
-        epsum=run_one_epoch(m1,m2,bar,'train',loss_func=loss_func,optimizerQ=optimizerQ)
+        epsum=run_one_epoch(m1,m2,bar,'train',loss_func=loss_func,optimizerQ=optimizer)
         summary={"loss/train":np.mean(epsum['loss'])}
         return summary
         
         
-    def eval_one_epoch():
+    def eval_one_epoch(m1):
         bar=tqdm(val_loader,ncols=100,unit='batch',leave=False)
-        epsum=run_one_epoch(modelQ,None,bar,"valid",loss_func=loss_func)
+        epsum=run_one_epoch(m1,None,bar,"valid",loss_func=loss_func)
         mean_acc=np.mean(epsum['acc'])
         summary={'meac':mean_acc}
         summary["loss/valid"]=np.mean(epsum['loss'])
@@ -214,7 +216,7 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
     preinterval_list = []
     tqdm_pretrain_epochs = tqdm(range(cfg.pretrain_epochs),unit='epoch',ncols=100)
     for e in tqdm_pretrain_epochs:
-        pretrain_summary=train_one_epoch(modelQh)
+        pretrain_summary=train_one_epoch(modelQh,None,optimizerQh)
         preval_summary,conf_mat,batch_acc_list=eval_one_epoch(modelQh)
         presummary={**pretrain_summary,**preval_summary}
         
@@ -251,8 +253,8 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
     interval_list=[]
 
     for e in tqdm_epochs:
-        train_summary=train_one_epoch()
-        val_summary,conf_mat,batch_acc_list=eval_one_epoch(modelQ,modelQh)
+        train_summary=train_one_epoch(modelQ,modelQh,optimizerQ)
+        val_summary,conf_mat,batch_acc_list=eval_one_epoch(modelQ)
         summary={**train_summary,**val_summary}
         
         if cfg.lr_sch:
@@ -295,7 +297,20 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
 
     # =======================================    
     
-    
+def get_img(inpt):
+        bs=inpt.shape[0]
+        pcview = PCViews()
+        imgs=pcview.get_img(inpt.permute(0,2,1))
+        
+        _,h,w=imgs.shape
+        
+        imgs=imgs.reshape(bs,6,-1)
+        max=torch.max(imgs,-1,keepdim=True)[0]
+        min=torch.min(imgs,-1,keepdim=True)[0]
+        
+        nor_img=(imgs-min)/(max-min+0.0001)
+        nor_img=nor_img.reshape(bs,6,h,w)
+        return nor_img    
 
 
 
@@ -317,6 +332,8 @@ def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=
         
         if mode=='train':
             #Train model Q#
+            x = get_img(x)
+            x=x.unsqueeze(2)
             optimizerQ.zero_grad()
             if modelQh != None:
                 pred,loss=modelQ(x, modelQh)

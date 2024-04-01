@@ -11,6 +11,8 @@ from util.pcview import PCViews
 
 from . import wa_module
 
+from cartoonx import CartoonX
+
 '''
 In this model,
 I replace the maxpooing among the frame dimension with my own 
@@ -186,24 +188,30 @@ class ViewNet(nn.Module):
 
 
 
-    def forward(self,inpt, moduleQ = None):
+    def forward(self,inpt, modelQh = None):
         '''
         norm_img shape is (20,6,128,128)
         20 is the batch_size
         6 is the view number
         128 is the image size
         '''
-        if(moduleQ != none):
+        CARTOONX_HPARAMS = {
+        "l1lambda": 100., "lr": 1e-1, 'obfuscation': 'gaussian',
+        "maximize_label": False, "optim_steps": 5,  
+        "noise_bs": 1, 'mask_init': 'ones'
+        } 
+        if(modelQh != None):
             '''
-            get mask s with cartoonX and moduleQ
+            get masked img with modelQh and cartoonX
             '''
+            cartoonx_method = CartoonX(model=modelQh, device='cuda', **CARTOONX_HPARAMS)
+            pred,loss=modelQh(inpt)
+            cartoonx = cartoonx_method(inpt,torch.argmax(pred, dim = 1).detach())
+            inpt_hat = cartoonx
         
-        norm_img=self.get_img(inpt) # (20,6,128,128)
-        #norm_img.save()
-        norm_img=norm_img.unsqueeze(2)
 
         
-        x=self.set_layer1(norm_img)
+        x=self.set_layer1(inpt_hat)
         x=self.set_layer2(x)
         
         gl = self.gl_layer1(self.vp1(x))
