@@ -237,7 +237,7 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
         logger.debug('epoch {}: {}. Highest: {}. Interval: {}'.format(e,accuracy,premax_ac,premax_interval))
         # print('epoch {}: {}. Highese: {}'.format(e,accuracy,np.max(acc_list)))
         
-        if np.max(acc_list)==pretrain_acclist[-1]:
+        if np.max(pretrain_acclist)==pretrain_acclist[-1]:
             presummary_saved={**presummary,
                             'model_state':modelQh.state_dict(),
                             'optimizer_state':optimizerQh.state_dict(),
