@@ -37,7 +37,7 @@ def get_arg():
     cfg.add_argument('--lr_sch',default=False)
     cfg.add_argument('--data_aug',default=True)
     cfg.add_argument('--dataset',default='ModeNet40C',choices=['ScanObjectNN','ModeNet40','ModeNet40C'])
-    cfg.add_argument('--pretrain_epochs',default=5,type=int)
+    cfg.add_argument('--pretrain_epochs',default=1,type=int)
 
 
     # ======== few shot cfg =============#
