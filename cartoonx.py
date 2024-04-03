@@ -86,7 +86,7 @@ class CartoonX:
             m_yh.append(m_y2)
         
         # compute obfuscation strategy
-
+        m_yl = torch.stack(m_yl)
         opt = torch.optim.Adam(m_yl+m_yh, lr=self.lr)
         '''
         # Get wavelet coefficients of colored image 
