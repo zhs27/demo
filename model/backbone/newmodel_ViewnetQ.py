@@ -197,7 +197,7 @@ class ViewNetpt(nn.Module):
         '''
         CARTOONX_HPARAMS = {
         "l1lambda": 2., "lr": 1e-1, 'obfuscation': 'gaussian',
-        "maximize_label": True, "optim_steps": 7,  
+        "maximize_label": True, "optim_steps": 3,  
         "noise_bs": 1, 'mask_init': 'ones'
         } 
         if(modelQh != None):
