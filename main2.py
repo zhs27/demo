@@ -27,7 +27,7 @@ def get_arg():
     cfg=argparse.ArgumentParser()
     cfg.add_argument('--exp_name',default='try')
     cfg.add_argument('--multigpu',default=False)
-    cfg.add_argument('--epochs',default=50,type=int)
+    cfg.add_argument('--epochs',default=40,type=int)
     cfg.add_argument('--decay_ep',default=5,type=int)
     cfg.add_argument('--gamma',default=0.7,type=float)
     cfg.add_argument('--lr',default=1e-4,type=float)
@@ -37,7 +37,7 @@ def get_arg():
     cfg.add_argument('--lr_sch',default=False)
     cfg.add_argument('--data_aug',default=True)
     cfg.add_argument('--dataset',default='ModeNet40C',choices=['ScanObjectNN','ModeNet40','ModeNet40C'])
-    cfg.add_argument('--pretrain_epochs',default=20,type=int)
+    cfg.add_argument('--pretrain_epochs',default=40,type=int)
 
 
     # ======== few shot cfg =============#
