@@ -171,8 +171,8 @@ def main(cfg):
 
     # Hparams WaveletX with spatial reg
     CARTOONX_HPARAMS = {
-        "l1lambda": 5., "lr": 1e-1, 'obfuscation': 'gaussian',
-        "maximize_label": True, "optim_steps": 1,  
+        "l1lambda": 100., "lr": 1e-1, 'obfuscation': 'gaussian',
+        "maximize_label": True, "optim_steps": 20,  
         "noise_bs": 1, 'mask_init': 'ones'
     } 
 
