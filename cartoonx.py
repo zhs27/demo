@@ -78,16 +78,16 @@ class CartoonX:
             y1,y2 = self.forward_dwt(i)
             self.compute_obfuscation_strategy(y1, y2)
             m_y1,m_y2 = self.get_init_mask(y1,y2)
-            m_y2 = torch.stack(m_y2)
-            #opts.append(torch.optim.Adam([m_y1]+m_y2, lr=self.lr))
+            
+            opts.append(torch.optim.Adam([m_y1]+m_y2, lr=self.lr))
             yl.append(y1)
             yh.append(y2)
             m_yl.append(m_y1)
             m_yh.append(m_y2)
         
         # compute obfuscation strategy
-        m_yl = torch.stack(m_yl)
-        opt = torch.optim.Adam([m_yl]+m_yh, lr=self.lr)
+
+        
         '''
         # Get wavelet coefficients of colored image 
         # (yl are low pass coefficients, yh are high pass coeffcients)
@@ -112,6 +112,7 @@ class CartoonX:
         
         
         # Initialize optimizer
+
         #opt = torch.optim.Adam(m_yl, lr=self.lr)
         
         # Get reference output for distortion
