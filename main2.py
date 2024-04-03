@@ -37,7 +37,7 @@ def get_arg():
     cfg.add_argument('--lr_sch',default=False)
     cfg.add_argument('--data_aug',default=True)
     cfg.add_argument('--dataset',default='ModeNet40C',choices=['ScanObjectNN','ModeNet40','ModeNet40C'])
-    cfg.add_argument('--pretrain_epochs',default=1,type=int)
+    cfg.add_argument('--pretrain_epochs',default=20,type=int)
 
 
     # ======== few shot cfg =============#
@@ -158,7 +158,7 @@ def main(cfg):
     
 
 
-def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
+def train_model(modelQ,modelQh, train_loader,val_loader,cfg, upfreq = 5):
     device=torch.device(cfg.device)
     modelQ=modelQh.to(device)
     modelQh=modelQh.to(device)
@@ -285,6 +285,9 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg):
         
         for name,val in summary.items():
             tensorboard.add_scalar(name,val,e)
+        #Update model Qh in every N batches# 
+        if e % upfreq == 0 and modelQh != None:
+            modelQh.load_state_dict(modelQ.state_dict())  
     
     summary_saved={**summary,
                 'model_state':modelQh.module.state_dict(),
@@ -314,7 +317,7 @@ def get_img(inpt):
 
 
 
-def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=None,show_interval=10, upfreq = 10):
+def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=None,show_interval=10):
     confusion_mat=np.zeros((cfg.k_way,cfg.k_way))
     summary={"acc":[],"loss":[]}
     device=next(modelQ.parameters()).device
@@ -342,9 +345,7 @@ def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=
             loss.backward()
             optimizerQ.step()
 
-            #Update model Qh in every N batches# 
-            if i % upfreq == 0 and modelQh != None:
-                modelQh.load_state_dict(modelQ.state_dict())   
+             
 
         else:
             with torch.no_grad():
