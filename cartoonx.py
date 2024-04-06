@@ -77,7 +77,6 @@ class CartoonX:
             y1,y2 = self.forward_dwt(i)
             self.compute_obfuscation_strategy(y1, y2)
             m_y1,m_y2 = self.get_init_mask(y1,y2)
-            
             optpara += [m_y1]+m_y2
             yl.append(y1)
             yh.append(y2)
@@ -159,11 +158,8 @@ class CartoonX:
             # Compute optiimization loss
             loss = distortion + self.l1lambda * l1waveletcoefs 
             # Perform optimization step
-            
             opt.zero_grad()
-                
             loss.backward()
-            
             opt.step()
 
             # Project masks into [0,1]
