@@ -190,7 +190,6 @@ def main(cfg):
         cartoonx = cartoonx_method(x,torch.argmax(pred, dim = 1).detach())
         
         cartoonx = torch.stack(cartoonx)
-        print(cartoonx.size())
         for j in range(6):
             picname1 = str(j) + '.png'
             picname2 = 'cartoonx' + str(j) + '.png'
