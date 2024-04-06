@@ -112,7 +112,7 @@ class CartoonX:
         
         # Initialize optimizer
 
-        opt = torch.optim.Adam(m_yl, lr=self.lr)
+        opt = torch.optim.Adam(optpara, lr=self.lr)
         
         # Get reference output for distortion
         if self.maximize_label:
