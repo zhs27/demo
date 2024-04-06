@@ -168,9 +168,12 @@ class CartoonX:
             # Compute optiimization loss
             loss = distortion + self.l1lambda * l1waveletcoefs 
             # Perform optimization step
-            opt.zero_grad()
-            loss.backward()
-            opt.step()
+            for opt in opts:
+                opt.zero_grad()
+                
+            loss.backward(retain_graph=True)
+            for opt in opts:
+                opt.step()
 
             # Project masks into [0,1]
             with torch.no_grad():
