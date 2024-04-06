@@ -2,7 +2,7 @@ import torch
 from tqdm import tqdm
 import argparse
 import numpy as np
-from cartoonx import CartoonX
+from model.backbone.cartoonx import CartoonX
 
 
 

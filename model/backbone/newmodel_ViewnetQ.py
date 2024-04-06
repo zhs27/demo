@@ -11,7 +11,7 @@ from util.pcview import PCViews
 
 from . import wa_module
 
-from cartoonx import CartoonX
+from model.backbone.cartoonx import CartoonX
 
 '''
 In this model,

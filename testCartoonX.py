@@ -21,7 +21,7 @@ import json
 import yaml
 import logging
 
-from cartoonx import CartoonX
+from model.backbone.cartoonx import CartoonX
 
 # ============== Get Configuration =================
 def get_arg():
