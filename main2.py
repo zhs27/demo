@@ -179,7 +179,7 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg, upfreq = 5):
         return summary
         
         
-    def eval_one_epoch(m1,m2):
+    def eval_one_epoch(m1,m2=None):
         bar=tqdm(val_loader,ncols=100,unit='batch',leave=False)
         epsum=run_one_epoch(m1,m2,bar,"valid",loss_func=loss_func)
         mean_acc=np.mean(epsum['acc'])
@@ -353,7 +353,10 @@ def run_one_epoch(modelQ,modelQh,bar,mode,loss_func,optimizerQ=None,optimizerQh=
             with torch.no_grad():
                 x = get_img(x)
                 x=x.unsqueeze(2)
-                pred,loss=modelQ(x,modelQh)
+                if modelQh != None:
+                    pred,loss=modelQ(x, modelQh)
+                else:
+                    pred,loss=modelQ(x)
         
         
         summary['loss']+=[loss.item()]
