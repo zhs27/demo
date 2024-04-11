@@ -217,7 +217,7 @@ def train_model(modelQ,modelQh, train_loader,val_loader,cfg, upfreq = 5):
     tqdm_pretrain_epochs = tqdm(range(cfg.pretrain_epochs),unit='epoch',ncols=100)
     for e in tqdm_pretrain_epochs:
         pretrain_summary=train_one_epoch(modelQh,None,optimizerQh)
-        preval_summary,conf_mat,batch_acc_list=eval_one_epoch(modelQh)
+        preval_summary,conf_mat,batch_acc_list=eval_one_epoch(modelQh,None)
         presummary={**pretrain_summary,**preval_summary}
         
         
