@@ -38,7 +38,7 @@ Here are arguments you need to give:
 --k_way: the number of classes.  
 --n_shot: the number of shots.  
 ```
-# Run
+## Run
 Start running by:<br />
 ```
 python main.py --exp_name <exp name> --dataset <dataset name> --data_path <your data path>  
