@@ -27,6 +27,7 @@ pip install PyWavelets
 Download ScanObjectNN from this [link](https://drive.google.com/file/d/1xzh7a__wHvg6lUAWi-Hbanyt4XHPtw0Y/view)<br />
 Download ModelNet40 from this [link](https://drive.google.com/file/d/10faoJ5rRT96Nhdqo9tGD3q7Vg_ZZ2apZ/view)<br />
 Download ModelNet40 from this [link](https://drive.google.com/file/d/1EFbGbtmORogjbbQ22giChio3i_G5Oahk/view)<br />
+Unzip the file after downloading<br />
 
 ## Arguments
 Here are arguments you need to give:
