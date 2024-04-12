@@ -4,7 +4,7 @@ This is the demo for my research on point cloud classification tasks.<br />
 
 
 ## Environment Set Up
-The code is tested under linux system
+The code is tested under linux system <br />
 Dependencies:<br />
 Pytorch, tqdm, tensorboard, yaml, pytorch_wavelets, sklearn, opencv, pywt<br />
 Create conda environment and activate<br />
