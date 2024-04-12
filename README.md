@@ -8,10 +8,10 @@ The code is tested under linux system
 Dependencies:<br />
 Pytorch, tqdm, tensorboard, yaml, pytorch_wavelets, sklearn, opencv, pywt<br />
 Create conda environment and activate<br />
-'''
+`
 conda create --name myenv
 conda activate myenv
-'''
+`
 Install dependencies<br />
 '''
 conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
