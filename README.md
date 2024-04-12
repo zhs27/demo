@@ -43,5 +43,5 @@ Start running by:<br />
 ```
 python main.py --exp_name <exp name> --dataset <dataset name> --data_path <your data path>  
 ```
-If I missed any dependencies or if you have any questions please leave an issue to remind me.
+If you have any questions please leave an issue to remind me.
 
